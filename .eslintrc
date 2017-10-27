@@ -1,6 +1,14 @@
 {
+    "env": {
+        "browser": true,
+        "node": true
+    },
+    "parser": "babel-eslint",  // 对babel代码添加eslint检查支持
     "extends": "airbnb",
     "rules": {
-        "comma-dangle": ["error", "always"]
+        "comma-dangle": ["error", "always-multiline"],  // 逗号在多行情况下必须使用，单行可以考虑不使用
+        "linebreak-style": ["error", "windows"],  // windows下换行符为crlf，而linux为lf
+        "semi": ["error", "never"],  // 禁止使用分号
+        "react/prop-types": [ 0 ]  // 取消react组件propType必须校验所有属性的检测
     }
 }
