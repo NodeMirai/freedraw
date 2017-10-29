@@ -1,0 +1,10 @@
+$width: 30%;
+$height: 100%;
+$bg: lightGreen;
+
+.chat {
+    width: $width;
+    height: $height;
+    background: $bg;
+    float: right;
+}

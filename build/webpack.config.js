@@ -38,7 +38,6 @@ const config = {
   plugins: [
     new HtmlWebpackPlugin({
       title: '万事不顺屋',
-      template: '../index.html',
     }),
   ],
 }

@@ -1,7 +1,11 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 
-import Navbar from './components/header/header'
+import Header from './components/header/header'
+import Containter from './components/container/container'
+import Footer from './components/footer/footer'
+
+import './app.scss'
 
 class App extends React.Component {
   constructor() {
@@ -15,7 +19,9 @@ class App extends React.Component {
     const { title } = this.state
     return (
       <div>
-        <Navbar title={title} />
+        <Header title={title} />
+        <Containter />
+        <Footer />
       </div>
     )
   }

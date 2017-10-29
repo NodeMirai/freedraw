@@ -1,0 +1,10 @@
+$width: 70%;
+$height: 20rem;
+$bgColor: red;
+
+.content-main {
+    width: $width;
+    float: left;
+    background: $bgColor;
+}
+

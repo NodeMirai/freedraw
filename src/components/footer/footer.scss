@@ -1,0 +1,10 @@
+$height: 2rem;
+$bgColor: lightPink;
+
+footer {
+    height: $height;
+    background: $bgColor;
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+}

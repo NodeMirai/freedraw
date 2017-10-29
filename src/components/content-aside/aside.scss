@@ -1,0 +1,10 @@
+$width: 30%;
+$height: calc(100% - 2rem);
+$bgColor: pink;
+
+aside {
+    width: $width;
+    height: $height;
+    background: $bgColor;
+    float: right;
+}
