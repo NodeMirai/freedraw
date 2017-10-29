@@ -1,16 +1,17 @@
 import React from 'react'
 
-// 创建属性校验
-
+import './header.scss'
 
 // 无状态函数组件
 function Navbar(props) {
   return (
-    <nav>
+    <header>
       <h1 className="title">
         <a href="#title">{ props.title }</a>
       </h1>
-    </nav>
+      <h2>案内</h2>
+      <h2>本丸</h2>
+    </header>
   )
 }
 

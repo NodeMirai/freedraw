@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 
-import Navbar from './components/navbar/navbar'
+import Navbar from './components/header/header'
 
 class App extends React.Component {
   constructor() {
@@ -21,9 +21,12 @@ class App extends React.Component {
   }
 }
 
+const app = document.createElement('div')
+document.body.appendChild(app)
+
 ReactDOM.render(
   <App />,
-  document.getElementById('hehe'),
+  app,
 )
 
 
