@@ -1,0 +1,59 @@
+$articleHeight: 100%;
+$articleListWidth: 15%;
+$editorWidth: 85%;
+$editorTitleHeight: 40px;
+$editorTitleFontSize: 18px;
+
+
+#article {
+    height: $articleHeight;
+    .editor {
+        float: right;
+        width: $editorWidth;
+
+        .editor-title {
+            display: block;
+            width: 100%;
+            border: none;
+            height: $editorTitleHeight;
+            font-size: $editorTitleFontSize;
+        }
+    }
+
+    .article-list {
+        float: left;
+        width: $articleListWidth;
+        padding-left: 0;
+        margin: 0;
+        height: 100%;
+        .add-article {
+            display: block;
+            width: 100%;
+            text-align: center;
+            font-size: 16px;
+            border-left: 4px solid red;
+            height: 30px;
+            padding: 4px 0;
+            box-sizing: border-box;
+            &:hover {
+                background: #ccc;
+                cursor: pointer;
+            }
+        }
+        li {
+            cursor: pointer;
+            .article-title {
+                text-align: center;
+            }
+            .article-datetime {
+                float: right;
+                padding-right: 10px;
+            }
+            &:hover {
+                background: #ccc;
+                cursor: pointer;
+            }
+        }
+    }
+
+}

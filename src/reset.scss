@@ -1,8 +1,14 @@
+$fontSize: 10px;
+
 html {
-    font-size: 10px;
+    font-size: $fontSize;
 }
 
 body {
     margin: 0;
     padding: 0;
+}
+
+ul li {
+    list-style: none;
 }
