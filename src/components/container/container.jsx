@@ -14,4 +14,4 @@ function Container() {
   )
 }
 
-module.exports = Container
+export default Container

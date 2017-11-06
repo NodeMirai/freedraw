@@ -9,8 +9,14 @@ function Navbar(props) {
       <h1 className="title">
         <a href="#title">{ props.title }</a>
       </h1>
-      {/* <h2>案内</h2>
-      <h2>本丸</h2> */}
+      <nav>
+        <ul>
+          <li>文章</li>
+          <li>音频</li>
+          <li>图片</li>
+          <li>视频</li>
+        </ul>
+      </nav>
       <form className="search-form">
         <input type="search" placeholder="搜索..." />
       </form>
@@ -19,4 +25,4 @@ function Navbar(props) {
   )
 }
 
-module.exports = Navbar
+export default Navbar
