@@ -9,4 +9,4 @@ function Contentnav() {
   )
 }
 
-module.exports = Contentnav
+export default Contentnav

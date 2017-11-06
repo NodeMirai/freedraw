@@ -18,8 +18,9 @@ class App extends React.Component {
   render() {
     const { title } = this.state
     return (
-      <div>
+      <div className="app">
         <Header title={title} />
+        {/* <Contentnav /> */}
         <Containter />
         <Footer />
       </div>
@@ -36,4 +37,4 @@ ReactDOM.render(
 )
 
 
-/* module.exports = Hello */
+/* export default Hello */
