@@ -6,6 +6,7 @@
 3. 在组件挂载之前(componentWillMount)用refs获取dom节点，将插件挂载到对应dom节点中
 
 ### 调整文章组件布局
+1. 两列布局已完成(浮动方式+clearfix实现)
 
 
 ### 问题
