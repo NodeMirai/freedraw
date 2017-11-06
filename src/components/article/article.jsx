@@ -4,13 +4,19 @@ import Simditor from 'simditor'
 import 'style-loader!css-loader!../../../node_modules/simditor/styles/simditor.css'
 import './article.scss'
 
+import moment from 'moment'
+
 class Article extends React.Component {
   constructor() {
     super()
     this.state = {
       editor: null,
+      articleList: [],
+      article: {}   // 当前选中文章
     }
-    // 引入文本编辑器
+  }
+
+  componentWillMount() {
 
   }
 
@@ -23,11 +29,26 @@ class Article extends React.Component {
     this.setState({
       editor
     })
-
     // 调用查询文章列表接口
 
   }
 
+  addArticle() {
+    let { articleList, article, editor } = this.state
+
+    articleList.push({
+      id: Math.random(),
+      title: '无',
+      content: '',
+      type: '',
+      datetime: moment().format('YYYY-MM-DD')
+    })
+    this.setState({
+      articleList,
+    })
+  }
+
+  // 点击已存在的文章时现实文章内容
   clickArticle(content) {
     // 获取simditor实例
     let editor = this.state.editor
@@ -36,27 +57,9 @@ class Article extends React.Component {
 
   render() {
     // 获取文章列表 articleList
-    let articleList = [{
-      id: 1,
-      title: 'one',
-      content: 'one content',
-      datetime: '2017-11-05'
-    }, {
-      id: 2,
-      title: 'two',
-      content: 'two content',
-      datetime: '2017-11-06'
-    }, {
-      id: 3,
-      title: 'three',
-      content: 'three content',
-      datetime: '2017-11-07'
-    }, {
-      id: 4,
-      title: 'four',
-      content: 'four content',
-      datetime: '2017-11-08'
-    }].map((val) => {
+    let { article ,articleList, editor } = this.state
+
+    articleList = articleList.map((val) => {
       return (
         <li key={ val.id } className="clearfix" onClick={ this.clickArticle.bind(this, val.content) }>
           <h3 className="article-title">{ val.title }</h3>
@@ -68,12 +71,12 @@ class Article extends React.Component {
     return (
       <section id="article">
         <ul className="article-list">
-          <a className="add-article">新建文章</a>
+          <a className="add-article" onClick={ this.addArticle.bind(this) }>新建文章</a>
           { articleList }
         </ul>
         <form className="editor">
-          <input className="editor-title" type="text" placeholder="请输入标题"/>
-          <textarea ref="article"></textarea>
+          <input className="editor-title" name="title" type="text" ref="title" defaultValue="" placeholder="请输入标题"/>
+          <textarea ref="article" defaultValue=""></textarea>
         </form>
       </section>
     )

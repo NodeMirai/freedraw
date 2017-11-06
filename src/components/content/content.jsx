@@ -9,16 +9,11 @@ import './content.scss'
 function Content() {
   return (
     <section className="content">
-<<<<<<< HEAD
-      <Contentnav />
       {/* <Contentmain /> */}
       <Article />
       {/* <Contentaside className="content-aside">内容推荐，外部链接</Contentaside> */}
-=======
-
       <Contentmain />
-      <Contentaside className="content-aside">内容推荐，外部链接</Contentaside>
->>>>>>> f3fd650fad95e50d2bfa80f4c601233bcf9f99c6
+      {/* <Contentaside className="content-aside">内容推荐，外部链接</Contentaside> */}
     </section>
   )
 }
