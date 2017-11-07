@@ -5,6 +5,7 @@ import 'style-loader!css-loader!../../../node_modules/simditor/styles/simditor.c
 import './article.scss'
 
 import moment from 'moment'
+import config from '../../../config'
 
 class Article extends React.Component {
   constructor() {
@@ -30,19 +31,34 @@ class Article extends React.Component {
       editor
     })
     // 调用查询文章列表接口
-
+    $.get('/article/', (data, status) => {
+      if (status === 200) {
+        console.log(data)
+      }
+    })
   }
 
   addArticle() {
     let { articleList, article, editor } = this.state
 
-    articleList.push({
-      id: Math.random(),
+    article = {
       title: '无',
       content: '',
       type: '',
       datetime: moment().format('YYYY-MM-DD')
+    }
+    $.post('/article/', article, (data, status) => {
+      if (status === 200) {
+        // 添加完成后获取最新列表
+        $.get('/article/', (data, status) => {
+          if (status === 200) {
+            console.log('get:', data)
+          }
+        })
+      }
     })
+    articleList.push()
+
     this.setState({
       articleList,
     })
@@ -61,7 +77,7 @@ class Article extends React.Component {
 
     articleList = articleList.map((val) => {
       return (
-        <li key={ val.id } className="clearfix" onClick={ this.clickArticle.bind(this, val.content) }>
+        <li className="clearfix" onClick={ this.clickArticle.bind(this, val.content) }>
           <h3 className="article-title">{ val.title }</h3>
           <i className="article-datetime">{ val.datetime }</i>
         </li>
