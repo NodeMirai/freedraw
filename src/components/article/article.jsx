@@ -32,8 +32,10 @@ class Article extends React.Component {
     })
     // 调用查询文章列表接口
     $.get('/article/', (data, status) => {
-      if (status === 200) {
-        console.log(data)
+      if (data.status === 200) {
+        this.setState({
+          articleList: data.data
+        })
       }
     })
   }
@@ -51,8 +53,10 @@ class Article extends React.Component {
       if (status === 200) {
         // 添加完成后获取最新列表
         $.get('/article/', (data, status) => {
-          if (status === 200) {
-            console.log('get:', data)
+          if (data.status === 200) {
+            this.setState({
+              articleList: data.data
+            })
           }
         })
       }
@@ -65,10 +69,11 @@ class Article extends React.Component {
   }
 
   // 点击已存在的文章时现实文章内容
-  clickArticle(content) {
+  clickArticle(title,content) {
     // 获取simditor实例
-    let editor = this.state.editor
+    let {editor} = this.state
     editor.setValue(content)
+    this.refs.title = title
   }
 
   render() {
@@ -77,7 +82,7 @@ class Article extends React.Component {
 
     articleList = articleList.map((val) => {
       return (
-        <li className="clearfix" onClick={ this.clickArticle.bind(this, val.content) }>
+        <li className="clearfix" onClick={ this.clickArticle.bind(this, val.title, val.content) }>
           <h3 className="article-title">{ val.title }</h3>
           <i className="article-datetime">{ val.datetime }</i>
         </li>
