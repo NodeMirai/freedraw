@@ -17,9 +17,11 @@
 ## 二. 项目结构
 
 
-
-
 ## 问题
-1. 如何在webpack下调试代码 
+1. 如何在webpack下调试代码
    devtool: 'eval-source-map',
 2. webpack-dev-server热启动
+
+
+## 规范
+1. 所有列表都以单数+List命名
