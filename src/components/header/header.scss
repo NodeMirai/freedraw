@@ -1,11 +1,33 @@
 $bgColor: rgba(211,205,198,1);
 
+$headerHeight: 5.5rem;
+$nav-top: 1rem;
+
 header {
-    background: $bgColor;
-    .title {
+    a {
+        text-decoration: none;
+    }
+    height: $headerHeight;
+    position: relative;
+    nav {
+        position: absolute;
+        top: $nav-top;
+        right: 5rem;
+    }
+    // background: $bgColor;
+    .title ,.search-form {
         display: inline-block;
     }
+    .title {
+        padding-left: 5rem;
+    }
     .search-form {
-        display: inline-block;
+        vertical-align: super;
+    }
+    .nav-top {
+        right: 5rem;
+        li {
+            float: left;
+        }
     }
 }

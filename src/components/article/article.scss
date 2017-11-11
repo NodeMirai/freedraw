@@ -7,28 +7,39 @@ $editorTitleFontSize: 18px;
 
 #article {
     height: $articleHeight;
-    .editor {
+    .editor-area {
         float: right;
         width: $editorWidth;
-
+        border-top: 1px solid transparent;
         .editor-title {
             display: block;
             width: 100%;
             border: none;
             height: $editorTitleHeight;
             font-size: $editorTitleFontSize;
+            padding-left: 2rem;
+        }
+        .editor {
+            border: none;
+        }
+        .toolbar {
+            li {
+                float: right;
+                line-height: 2rem;
+                padding: .5rem 1rem;
+                &:hover {
+                    cursor: pointer;
+                    background: #fff;
+                }
+            }
         }
     }
-
     .article-list {
+        height: 40rem;
         float: left;
         width: $articleListWidth;
-        padding-left: 0;
-        margin: 0;
-        height: 100%;
         .add-article {
             display: block;
-            width: 100%;
             text-align: center;
             font-size: 16px;
             border-left: 4px solid red;
@@ -40,18 +51,25 @@ $editorTitleFontSize: 18px;
                 cursor: pointer;
             }
         }
-        li {
-            cursor: pointer;
-            .article-title {
-                text-align: center;
-            }
-            .article-datetime {
-                float: right;
-                padding-right: 10px;
-            }
-            &:hover {
-                background: #ccc;
+        .list {
+            li {
                 cursor: pointer;
+                .article-title {
+                    text-align: center;
+                    text-overflow: ellipsis;
+                    overflow: hidden;
+                }
+                .article-datetime {
+                    float: right;
+                    padding-right: 10px;
+                }
+                &:hover {
+                    background: #ccc;
+                    cursor: pointer;
+                }
+            }
+            .delete-article {
+                display: none;
             }
         }
     }

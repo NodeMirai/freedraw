@@ -13,7 +13,25 @@ class Article extends React.Component {
     this.state = {
       editor: null,
       articleList: [],
-      article: {}   // 当前选中文章
+      article: {
+        title: '',
+        content: ''
+      },   // 当前选中文章
+      toolbar: [
+        {
+          text: '保存',
+          onclick: (article) => {
+            // 调用修改文章接口
+            this.updateArticle(article._id, this.refs.title.value, this.state.editor.getValue())
+          }
+        }, {
+          text: '删除',
+          onclick: (article) => {
+            // 删除接口
+            this.removeArticle(article._id)
+          }
+        }
+      ]
     }
   }
 
@@ -21,6 +39,7 @@ class Article extends React.Component {
 
   }
 
+  // 模版渲染完成后开始渲染初始数据
   componentDidMount() {
     let editor = this.state.editor
     // 查找textarea dom
@@ -30,6 +49,11 @@ class Article extends React.Component {
     this.setState({
       editor
     })
+    this.getAllArticle()
+  }
+
+  // 查询全部文章
+  getAllArticle() {
     // 调用查询文章列表接口
     $.get('/article/', (data, status) => {
       if (data.status === 200) {
@@ -40,6 +64,7 @@ class Article extends React.Component {
     })
   }
 
+  // 新增文章
   addArticle() {
     let { articleList, article, editor } = this.state
 
@@ -50,54 +75,105 @@ class Article extends React.Component {
       datetime: moment().format('YYYY-MM-DD')
     }
     $.post('/article/', article, (data, status) => {
-      if (status === 200) {
+      if (data.status === 200) {
         // 添加完成后获取最新列表
-        $.get('/article/', (data, status) => {
-          if (data.status === 200) {
-            this.setState({
-              articleList: data.data
-            })
-          }
-        })
+        this.getAllArticle()
       }
     })
-    articleList.push()
 
-    this.setState({
-      articleList,
+  }
+
+  // 初始化当前文章状态
+  initArticle() {
+    let { editor, article } = this.state
+    // 清空title与editor
+    this.refs.title.value = ''
+    editor.setValue('')
+  }
+
+  // 删除文章
+  removeArticle(id) {
+    $.ajax({
+      type: 'DELETE',
+      url: `/article/id/${id}`,
+      dataType: 'json',
+      success: (data) => {
+        this.getAllArticle()
+      },
+    })
+  }
+
+  // 更新文章
+  updateArticle(id, title, content) {
+    $.ajax({
+      type: 'PUT',
+      url: `/article/id/`,
+      data: {
+        id: id,
+        title, title,
+        content: content,
+      },
+      dataType: 'json',
+      success: (data) => {
+        this.getAllArticle()
+      },
     })
   }
 
   // 点击已存在的文章时现实文章内容
-  clickArticle(title,content) {
+  clickArticle(article) {
     // 获取simditor实例
-    let {editor} = this.state
-    editor.setValue(content)
-    this.refs.title = title
+    let { editor } = this.state
+    editor.setValue(article.content)
+    this.refs.title.value = article.title
+    this.setState({
+      article
+    })
   }
 
   render() {
     // 获取文章列表 articleList
-    let { article ,articleList, editor } = this.state
+    let { article, articleList, editor, toolbar } = this.state
 
+    // 工具栏数据,当点击文章后才会出现
+    if (article._id) {
+      toolbar = toolbar.map((val) => {
+        return (
+          <li key={val.text} onClick={val.onclick.bind(this, article)}>{val.text}</li>
+        )
+      })
+    } else {
+      toolbar = []
+    }
+
+    // 文章列表数据
     articleList = articleList.map((val) => {
+      // datetime时间格式化
+      let formatTime = moment(val.datetime).format('YYYY-MM-DD')
+
       return (
-        <li className="clearfix" onClick={ this.clickArticle.bind(this, val.title, val.content) }>
-          <h3 className="article-title">{ val.title }</h3>
-          <i className="article-datetime">{ val.datetime }</i>
+        <li className="clearfix" key={val._id} onClick={this.clickArticle.bind(this, val)}>
+          <h3 className="article-title">{val.title}</h3>
+          <i className="article-datetime">{formatTime}</i>
         </li>
       )
     })
 
     return (
       <section id="article">
-        <ul className="article-list">
-          <a className="add-article" onClick={ this.addArticle.bind(this) }>新建文章</a>
-          { articleList }
-        </ul>
-        <form className="editor">
-          <input className="editor-title" name="title" type="text" ref="title" defaultValue="" placeholder="请输入标题"/>
-          <textarea ref="article" defaultValue=""></textarea>
+        <section className="article-list">
+          <a className="add-article" onClick={this.addArticle.bind(this)}>新建文章</a>
+          <ul className="list p0">
+            {articleList}
+          </ul>
+        </section>
+        <form className="editor-area">
+          <input className="editor-title" name="title" type="text" ref="title" defaultValue="" placeholder="请输入标题" />
+          <ul className="toolbar clearfix m0">
+            {/* 操作工具栏，后期需要支持word或者excel导入导出，以及其他扩展功能，需要保存在状态中 */}
+            {toolbar}
+          </ul>
+          <textarea className="editor" ref="article" defaultValue=""></textarea>
         </form>
       </section>
     )
