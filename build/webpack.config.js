@@ -7,8 +7,8 @@ const config = {
   entry: '../src/app.jsx',
 
   output: {
-    path: path.resolve(__dirname, 'dist'),
-    filename: 'release.bundle.js',
+    path: path.resolve(__dirname, 'dev'),
+    filename: 'dev.bundle.js',
   },
 
   resolve: {
