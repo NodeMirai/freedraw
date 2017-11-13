@@ -57,3 +57,5 @@ moment.js 467kb：自己封装时间相关工具
 react-dom 700kb：改为生产版本，使用cdn加速
 jquery：自己封装ajax工具
 simple-loader|module|hotkeys: 看看是个啥东西再说
+
+- 删除source-map项
