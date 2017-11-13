@@ -35,3 +35,25 @@ chown -R _www:admin(根据登陆用户决定) proxy_temp
 6. vertical-align各属性学习
 7. 文本过长时超出部分自定义显示
 使用overflow: hidden将过长部分隐藏，然后使用text-overflow: (string)来定义过长部分显示内容
+
+## 2017-11-13
+### webpack打包文件7m，加载过慢解决方案
+1. nginx服务器开启gzip压缩
+在server外侧添加一下选项(__注意gzip_types中js的压缩方式，一半一般使用application/javascript__)
+    gzip on;
+    gzip_min_length  1k;
+    gzip_buffers     4 16k;
+    gzip_http_version 1.1;
+    gzip_comp_level 4;
+    gzip_types       text/plain text/css text/javascript application/javascript application/x-javascript application/xml  image/jpeg image/gif image/png;
+    gzip_proxied       any;
+    gzip_static on;
+    gzip_vary on;
+
+2. 优化webpack打包
+- 在webpack.config.js目录下执行webpack --display-modules --sort-modules-by size可看到所有引入模块并按照从小到大排序
+
+moment.js 467kb：自己封装时间相关工具
+react-dom 700kb：改为生产版本，使用cdn加速
+jquery：自己封装ajax工具
+simple-loader|module|hotkeys: 看看是个啥东西再说

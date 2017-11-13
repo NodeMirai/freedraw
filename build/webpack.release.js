@@ -1,5 +1,4 @@
 const path = require('path')
-const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 const config = {
 
@@ -14,8 +13,6 @@ const config = {
   resolve: {
     extensions: ['.js', '.jsx', '.json'],
   },
-
-  devtool: 'eval-source-map',
 
   module: {
     rules: [
@@ -38,9 +35,6 @@ const config = {
   },
 
   plugins: [
-    new HtmlWebpackPlugin({
-      title: '万事不顺屋',
-    }),
   ],
 }
 

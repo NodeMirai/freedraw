@@ -1,5 +1,4 @@
 const path = require('path')
-const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 const config = {
 
@@ -16,6 +15,15 @@ const config = {
   },
 
   devtool: 'eval-source-map',
+
+  externals: {
+    "react": 'React',
+    "react-dom": "ReactDOM",
+    "react-router": "ReactRouter",
+    'history': "History",
+    'redux': 'Redux',
+    'react-redux': 'ReactRedux'
+  },
 
   module: {
     rules: [
@@ -38,9 +46,7 @@ const config = {
   },
 
   plugins: [
-    new HtmlWebpackPlugin({
-      title: '万事不顺屋',
-    }),
+
   ],
 }
 
