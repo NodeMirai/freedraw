@@ -1,8 +1,11 @@
 $articleHeight: 100%;
-$articleListWidth: 15%;
+$articleListWidth: calc(15% - 2px);
 $editorWidth: 85%;
 $editorTitleHeight: 40px;
 $editorTitleFontSize: 18px;
+
+$mainbg: #df744a;
+$borderColor: #ccc;
 
 
 #article {
@@ -10,19 +13,23 @@ $editorTitleFontSize: 18px;
     .editor-area {
         float: right;
         width: $editorWidth;
-        border-top: 1px solid transparent;
         .editor-title {
             display: block;
             width: 100%;
             border: none;
+            border-top: 1px solid $borderColor;
             height: $editorTitleHeight;
             font-size: $editorTitleFontSize;
             padding-left: 2rem;
+            &:focus {
+                outline: none;
+            }
         }
         .editor {
             border: none;
         }
         .toolbar {
+            background: #dedede;
             li {
                 float: right;
                 line-height: 2rem;
@@ -38,16 +45,16 @@ $editorTitleFontSize: 18px;
         height: 40rem;
         float: left;
         width: $articleListWidth;
+        border: 1px solid $borderColor;
         .add-article {
             display: block;
             text-align: center;
             font-size: 16px;
             border-left: 4px solid red;
-            height: 30px;
-            padding: 4px 0;
-            box-sizing: border-box;
+            height: 5rem;
+            line-height: 5rem;
             &:hover {
-                background: #ccc;
+                background-color: $borderColor;
                 cursor: pointer;
             }
         }
@@ -64,7 +71,7 @@ $editorTitleFontSize: 18px;
                     padding-right: 10px;
                 }
                 &:hover {
-                    background: #ccc;
+                    background-color: #dcdcdc;
                     cursor: pointer;
                 }
             }

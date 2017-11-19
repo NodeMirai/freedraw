@@ -1,4 +1,5 @@
 const path = require('path')
+const htmlWebpackPlugin = require('html-webpack-plugin')
 
 const config = {
 
@@ -16,14 +17,14 @@ const config = {
 
   devtool: 'eval-source-map',
 
-  externals: {
+  /* externals: {
     "react": 'React',
     "react-dom": "ReactDOM",
     "react-router": "ReactRouter",
     'history': "History",
     'redux': 'Redux',
     'react-redux': 'ReactRedux'
-  },
+  }, */
 
   module: {
     rules: [
@@ -37,16 +38,21 @@ const config = {
             loader: 'sass-loader',
           },
         ],
-      }
+      },
+      { test: /\.(png|jpg|jpeg|gif|eot|ttf)$/, use: 'file-loader' },
+      {test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/, loader: 'url-loader?limit=10000&minetype=application/font-woff'},
     ],
   },
 
   devServer: {
-    contentBase: './dist',
+    contentBase: './dev',
   },
 
   plugins: [
-
+    new htmlWebpackPlugin({
+      title: '万事不顺屋',
+      template: './dev/index.html'
+    })
   ],
 }
 

@@ -59,4 +59,11 @@ jquery：自己封装ajax工具
 simple-loader|module|hotkeys: 看看是个啥东西再说
 
 - 删除source-map项(完全就是这货的锅)
-- 查找相关优化插件
+
+
+## 2017-11-17
+### webpack-dev-server
+- 需要配合html-webpack-plugin一起使用才可访问页面
+- 通过配置devServer可以设定服务根目录位置
+### webpack优化插件使用
+- CommonsChunkPlugin 将公共模块单独抽出，需要在webpack中配置多个entry

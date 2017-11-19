@@ -26,7 +26,8 @@ const config = {
             loader: 'sass-loader',
           },
         ],
-      }
+      },
+      { test: /\.(png|jpg|jpeg|gif|woff|eot|ttf)$/, use: 'file-loader' },
     ],
   },
 

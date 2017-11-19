@@ -93,12 +93,15 @@ class Article extends React.Component {
 
   // 删除文章
   removeArticle(id) {
+    let editor = this.state.editor
     $.ajax({
       type: 'DELETE',
       url: `/article/id/${id}`,
       dataType: 'json',
       success: (data) => {
         this.getAllArticle()
+        this.refs.title.value = ''
+        editor.setValue('')
       },
     })
   }
@@ -135,8 +138,10 @@ class Article extends React.Component {
     // 获取文章列表 articleList
     let { article, articleList, editor, toolbar } = this.state
 
+    article = articleList[0]  // 默认显示第一个文章，如果文章列表无文章则不显示
+
     // 工具栏数据,当点击文章后才会出现
-    if (article._id) {
+    if (article) {
       toolbar = toolbar.map((val) => {
         return (
           <li key={val.text} onClick={val.onclick.bind(this, article)}>{val.text}</li>
@@ -162,8 +167,10 @@ class Article extends React.Component {
     return (
       <section id="article">
         <section className="article-list">
-          <a className="add-article" onClick={this.addArticle.bind(this)}>新建文章</a>
-          <ul className="list p0">
+          <a className="add-article" onClick={this.addArticle.bind(this)}>
+            <i className="fa fa-plus-circle" style={{ marginRight: .5 + 'rem' }}></i>新建文章
+          </a>
+          <ul className="list p0 m0">
             {articleList}
           </ul>
         </section>
