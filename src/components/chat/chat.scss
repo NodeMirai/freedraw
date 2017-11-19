@@ -1,10 +1,12 @@
 $width: 30%;
-$height: 100%;
+$height: 30rem;
 $bg: lightGreen;
 
 .chat {
+    position: fixed;
+    right: 0;
+    top: 12.5rem;
     width: $width;
     height: $height;
     background: $bg;
-    float: right;
 }

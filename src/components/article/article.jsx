@@ -58,7 +58,7 @@ class Article extends React.Component {
     $.get('/article/', (data, status) => {
       if (data.status === 200) {
         this.setState({
-          articleList: data.data
+          articleList: data.data || []
         })
       }
     })
