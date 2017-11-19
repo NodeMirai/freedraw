@@ -138,7 +138,9 @@ class Article extends React.Component {
     // 获取文章列表 articleList
     let { article, articleList, editor, toolbar } = this.state
 
-    article = articleList[0]  // 默认显示第一个文章，如果文章列表无文章则不显示
+    if (!article) {
+      article = articleList[0]  // 默认显示第一个文章，如果文章列表无文章则不显示
+    }
 
     // 工具栏数据,当点击文章后才会出现
     if (article) {
