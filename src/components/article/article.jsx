@@ -180,7 +180,9 @@ class Article extends React.Component {
             {/* 操作工具栏，后期需要支持word或者excel导入导出，以及其他扩展功能，需要保存在状态中 */}
             {toolbar}
           </ul>
-          <textarea className="editor" ref="article" defaultValue=""></textarea>
+          <div className="editor">
+            <textarea ref="article" defaultValue=""></textarea>
+          </div>
         </form>
       </section>
     )
