@@ -1,5 +1,6 @@
 const path = require('path')
 const htmlWebpackPlugin = require('html-webpack-plugin')
+var CopyWebpackPlugin = require('copy-webpack-plugin');
 
 const config = {
 
@@ -9,6 +10,7 @@ const config = {
   output: {
     path: path.resolve(__dirname, 'dev'),
     filename: 'dev.bundle.js',
+    publicPath: '/'
   },
 
   resolve: {
@@ -39,20 +41,39 @@ const config = {
           },
         ],
       },
-      { test: /\.(png|jpg|jpeg|gif|eot|ttf)$/, use: 'file-loader' },
-      {test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/, loader: 'url-loader?limit=10000&minetype=application/font-woff'},
+      /* {
+        test: /\.(png|jpg)$/,
+        use: 'url-loader?limit=8192&name=images/[hash:8].[name].[ext]'
+      }, */
+      /* {
+        test: /\.(png|jpg|gif)$/,
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              name: '[name]-[hash:8].[ext]',
+              publicPath: '/',
+              outputPath: '/build/dev/'
+            }
+          }
+        ]
+      } */
     ],
   },
 
   devServer: {
-    contentBase: './dev',
+    contentBase: '/',
   },
 
   plugins: [
     new htmlWebpackPlugin({
       title: '万事不顺屋',
-      template: './dev/index.html'
-    })
+      template: '../build/dev/index.html'
+    }),
+    new CopyWebpackPlugin([{
+      from: '../src/assets/',
+      to: __dirname + '/dev/'
+  }])
   ],
 }
 

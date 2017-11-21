@@ -2,8 +2,6 @@ import React from 'react'
 import {Link} from 'react-router-dom'
 import './header.scss'
 
-console.log(Link)
-
 // 无状态函数组件
 function Navbar(props) {
   return (
@@ -31,7 +29,7 @@ function Navbar(props) {
         </form>
 
         <div className="login">
-          <a className="login-btn">登录</a>
+          <a className="login-btn" />
         </div>
       </div>
 
