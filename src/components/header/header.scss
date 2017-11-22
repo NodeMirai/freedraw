@@ -54,7 +54,11 @@ header {
             }
         }
         .login-btn {
-            background: url('/img/qq_login.png')
+            background: url('/img/qq_login.png');
+            width: 100px;
+            height: 20px;
+            display: inline-block;
+            cursor: pointer;
         }
     }
 }
