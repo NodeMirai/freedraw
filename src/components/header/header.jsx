@@ -1,8 +1,29 @@
 import React from 'react'
-import {Link} from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import './header.scss'
 
-console.log(Link)
+import $ from 'jquery'
+
+let client_id = 1106547932
+let redirect_uri = 'http%3A%2F%2Fnodemirai.com'
+let state = 'test'
+
+function login() {
+  $.ajax(
+    {
+      url: `/oauth2.0/authorize?response_type=code&client_id=${client_id}&redirect_uri=${redirect_uri}&state=${state}`,
+      //url: '/oauth',
+      success: (data) => {
+        $('#chat').html(data)
+      },
+      error: (data) => {
+        console.log(data)
+      },
+      type: 'GET',
+      dataType: 'html'
+    }
+)
+}
 
 // 无状态函数组件
 function Navbar(props) {
@@ -31,7 +52,7 @@ function Navbar(props) {
         </form>
 
         <div className="login">
-          <a className="login-btn">登录</a>
+          <a className="login-btn" onClick={login} />
         </div>
       </div>
 

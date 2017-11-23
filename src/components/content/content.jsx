@@ -1,7 +1,7 @@
 import React from 'react'
 import {
+  Router,
   Route,
-  Switch
 } from 'react-router-dom';
 
 import Contentaside from '../content-aside/aside'
@@ -15,11 +15,10 @@ import './content.scss'
 function Content() {
   return (
     <section className="content">
-      <Switch>
-        <Route path="/article" component={Article} />
-        <Route path="/picture" component={Picture} />
-        <Route path="/video" component={ Video} />
-      </Switch>
+      <Route exact path="/" component={Article} />
+      <Route exact path="/audio" component={ Video} />
+      <Route exact path="/picture" component={Picture} />
+      <Route exact path="/video" component={ Video} />
     </section>
   )
 }

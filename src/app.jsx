@@ -41,7 +41,7 @@ document.body.appendChild(app)
 
 ReactDOM.render(
   <Router>
-    <Route exact path="/" component={App}/>
+    <Route path="/" component={App}/>
   </Router>,
   app,
 )
