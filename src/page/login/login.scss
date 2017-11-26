@@ -1,0 +1,53 @@
+.login {
+    width: 20rem;
+    .tab-head {
+        h3 {
+            text-align: center;
+            .clicked,
+            .unclicked {
+                display: inline-block;
+                font-size: 2rem;
+                margin: 1rem 2rem;
+                cursor: pointer;
+            }
+            .clicked {
+                border-bottom: 2px solid #ea6f5a;
+                color: #ea6f5a;
+            }
+        }
+    }
+    .tab-content {
+        button {
+            display: block;
+            width: 100%;
+        }
+        .username, .password {
+            border: 1px solid #c8c8c8;
+        }
+        .username {
+            border-radius: .5rem .5rem 0 0;
+            border-bottom: none;
+        }
+        .password {
+            border-radius: 0 0 .5rem .5rem;
+        }
+        input {
+            display: block;
+            width: 90%;
+            line-height: 3rem;
+            margin: 0 1rem;
+            border: none;
+            &:focus {
+                outline: none;
+            }
+        }
+        button {
+            margin-top: 1rem;
+            padding: .5rem 2rem;
+            border-radius: 1rem;
+            &:focus {
+                outline: none;
+            }
+        }
+    }
+}

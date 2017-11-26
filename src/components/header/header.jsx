@@ -8,23 +8,6 @@ let client_id = 1106547932
 let redirect_uri = 'http%3A%2F%2Fnodemirai.com'
 let state = 'test'
 
-function login() {
-  $.ajax(
-    {
-      url: `/oauth2.0/authorize?response_type=code&client_id=${client_id}&redirect_uri=${redirect_uri}&state=${state}`,
-      //url: '/oauth',
-      success: (data) => {
-        $('#chat').html(data)
-      },
-      error: (data) => {
-        console.log(data)
-      },
-      type: 'GET',
-      dataType: 'html'
-    }
-)
-}
-
 // 无状态函数组件
 function Navbar(props) {
   return (
@@ -52,7 +35,9 @@ function Navbar(props) {
         </form>
 
         <div className="login">
-          <a className="login-btn" onClick={login} />
+          <Link to="/login">登陆</Link>
+          {/* 这里需要路由传值 */}
+          <Link to="/login">注册</Link>
         </div>
       </div>
 

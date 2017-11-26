@@ -67,3 +67,7 @@ simple-loader|module|hotkeys: 看看是个啥东西再说
 - 通过配置devServer可以设定服务根目录位置
 ### webpack优化插件使用
 - CommonsChunkPlugin 将公共模块单独抽出，需要在webpack中配置多个entry
+
+## 2017-11-26
+### 问题记录
+1. exact作用是什么，为何不使用就不跳转

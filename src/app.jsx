@@ -1,13 +1,12 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import {BrowserRouter as Router,Route,Link} from 'react-router-dom'
+import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom'
 
 import Header from './components/header/header'
 import Containter from './components/container/container'
 import Footer from './components/footer/footer'
 import Chat from './components/chat/chat'
-
-
+import Login from './page/login/login'
 
 import './app.scss'
 
@@ -41,7 +40,10 @@ document.body.appendChild(app)
 
 ReactDOM.render(
   <Router>
-    <Route path="/" component={App}/>
+    <div>
+      <Route exact path="/" component={App} />
+      <Route exact path="/login" component={Login} />
+    </div>
   </Router>,
   app,
 )
