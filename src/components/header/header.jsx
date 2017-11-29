@@ -34,10 +34,10 @@ function Navbar(props) {
           <i className="fa fa-search"></i>
         </form>
 
-        <div className="login">
-          <Link to="/login">登陆</Link>
+        <div className="login-btn-group">
+          <Link to="/login/1">登陆</Link>
           {/* 这里需要路由传值 */}
-          <Link to="/login">注册</Link>
+          <Link to="/login/2">注册</Link>
         </div>
       </div>
 

@@ -42,7 +42,7 @@ ReactDOM.render(
   <Router>
     <div>
       <Route exact path="/" component={App} />
-      <Route exact path="/login" component={Login} />
+      <Route exact path="/login/:type" component={Login} />
     </div>
   </Router>,
   app,
