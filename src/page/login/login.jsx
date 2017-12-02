@@ -77,6 +77,28 @@ class Login extends React.Component {
     })
   }
 
+  login() {
+    let username = this.refs.loginUsername.value
+    let password = this.refs.loginPassword.value
+    $.ajax({
+      url: '/api/authenticate',
+      data: {
+        username: username,
+        password: password,
+      },
+      type: 'PUT',
+      success: (data) => {
+        /**
+         * 登陆成功后将获取的token存在localstorage中，用于判断登陆状态
+         * 同时跳转至首页
+         */
+        let token = data.token
+        localStorage.setItem('token', token)
+        location.href = '/'
+      },
+    })
+  }
+
   render() {
     let { type, isUsernameRepeat } = this.state
 
@@ -84,11 +106,11 @@ class Login extends React.Component {
       (
         <div className="tab-content">
           <div className="username">
-            <input type="text" ref="loginUsername" placeholder="用户名" onBlur={() => this.checkUsername()} />
+            <input type="text" ref="registerUsername" placeholder="用户名" onBlur={() => this.checkUsername()} />
           </div>
 
           <div className="password">
-            <input type="password" ref="password" placeholder="密码" />
+            <input type="password" ref="registerPassword" placeholder="密码" />
           </div>
           {
             isUsernameRepeat && <p style={{ color: 'rgb(255, 0, 0)' }}>用户名重复</p>
@@ -100,13 +122,13 @@ class Login extends React.Component {
       (
         <div className="tab-content">
           <div className="username">
-            <input type="text" ref="registerUsername" placeholder="用户名" />
+            <input type="text" ref="loginUsername" placeholder="用户名" />
           </div>
 
           <div className="password">
-            <input type="password" ref="password" placeholder="密码" />
+            <input type="password" ref="loginPassword" placeholder="密码" />
           </div>
-          <button>登陆</button>
+          <button onClick={() => this.login()}>登陆</button>
         </div>
       )
     return (
