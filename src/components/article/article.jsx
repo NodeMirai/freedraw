@@ -55,7 +55,7 @@ class Article extends React.Component {
   // 查询全部文章
   getAllArticle() {
     // 调用查询文章列表接口
-    $.get('/article/', (data, status) => {
+    $.get('/api/article/', (data, status) => {
       if (data.status === 200) {
         this.setState({
           articleList: data.data || []
@@ -74,7 +74,7 @@ class Article extends React.Component {
       type: '',
       datetime: moment().format('YYYY-MM-DD')
     }
-    $.post('/article/', article, (data, status) => {
+    $.post('/api/article/', article, (data, status) => {
       if (data.status === 200) {
         // 添加完成后获取最新列表
         this.getAllArticle()
@@ -96,7 +96,7 @@ class Article extends React.Component {
     let editor = this.state.editor
     $.ajax({
       type: 'DELETE',
-      url: `/article/id/${id}`,
+      url: `/api/article/${id}`,
       dataType: 'json',
       success: (data) => {
         this.getAllArticle()
@@ -110,7 +110,7 @@ class Article extends React.Component {
   updateArticle(id, title, content) {
     $.ajax({
       type: 'PUT',
-      url: `/article/id/`,
+      url: `/api/article/`,
       data: {
         id: id,
         title, title,

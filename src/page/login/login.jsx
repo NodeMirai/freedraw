@@ -37,7 +37,7 @@ class Login extends React.Component {
   // 失去焦点后查询用户名是否重复，重复则提示
   checkUsername() {
     let username = this.refs.loginUsername.value
-    $.get(`/user/${username}`, (data, status) => {
+    $.get(`/api/authenticate/${username}`, (data, status) => {
       if (data.status === 200) {
         if (data.data) {
           this.setState({
@@ -60,7 +60,7 @@ class Login extends React.Component {
     let username = this.refs.loginUsername.value
     let password = this.refs.password.value
     $.ajax({
-      url: '/user',
+      url: '/api/authenticate/',
       type: 'POST',
       dataType: 'json',
       data: {
