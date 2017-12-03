@@ -1,4 +1,6 @@
 import React from 'react'
+import { connect } from 'react-redux'
+
 import Simditor from 'simditor'
 import 'style-loader!css-loader!../../../node_modules/simditor/styles/simditor.css'
 import './article.scss'
@@ -6,34 +8,20 @@ import './article.scss'
 import moment from 'moment'
 import config from '../../../config'
 
-import fetchAPI from '../../share/util/fetchAPI'
+import * as articleService from './article.service'
 
+/**
+ * 使用connect装饰器直接增强组件
+ * 参数同connect中的参数，被注释的组件则为增强组件
+ */
+@connect(
+  (articleData) => (articleData.article),
+  require('../../action/article')
+)
 class Article extends React.Component {
-  constructor() {
-    super()
-    this.state = {
-      editor: null,
-      articleList: [],
-      article: {
-        title: '',
-        content: ''
-      },   // 当前选中文章
-      toolbar: [
-        {
-          text: '保存',
-          onclick: (article) => {
-            // 调用修改文章接口
-            this.updateArticle(article._id, this.refs.title.value, this.state.editor.getValue())
-          }
-        }, {
-          text: '删除',
-          onclick: (article) => {
-            // 删除接口
-            this.removeArticle(article._id)
-          }
-        }
-      ]
-    }
+  constructor(props) {
+    super(props)
+    console.log(props)
   }
 
   componentWillMount() {
@@ -42,7 +30,7 @@ class Article extends React.Component {
 
   // 模版渲染完成后开始渲染初始数据
   componentDidMount() {
-    let editor = this.state.editor
+    let { editor, getArticle } = this.props
     // 查找textarea dom
     editor = new Simditor({
       textarea: this.refs.article
@@ -50,44 +38,25 @@ class Article extends React.Component {
     this.setState({
       editor
     })
-    this.getAllArticle()
-  }
-
-  // 查询全部文章
-  getAllArticle() {
-
-    // 调用查询文章列表接口
-    fetchAPI('/api/article/', { method: "GET" }, (data) => {
-      if (data.status === 200) {
-        this.setState({
-          articleList: data.data || []
-        })
-      }
-    })
+    getArticle()
   }
 
   // 新增文章
   addArticle() {
-    let { articleList, article, editor } = this.state
-
-    article = {
+    let { addArticle } = this.props
+    let article = {
       title: '无',
       content: '',
       type: '',
       datetime: moment().format('YYYY-MM-DD')
     }
-    fetchAPI('/api/article/', { method: "POST", data: article }, (data) => {
-      if (data.status === 200) {
-        // 添加完成后获取最新列表
-        this.getAllArticle()
-      }
-    })
-
+    addArticle(article)
   }
 
   // 初始化当前文章状态
   initArticle() {
-    let { editor, article } = this.state
+    let { article } = this.props
+    let editor = this.state.editor
     // 清空title与editor
     this.refs.title.value = ''
     editor.setValue('')
@@ -96,40 +65,56 @@ class Article extends React.Component {
   // 删除文章
   removeArticle(id) {
     let editor = this.state.editor
-    fetchAPI(`/api/article/${id}`, {method: "DELETE"}, (data) => {
-      this.getAllArticle()
-      this.refs.title.value = ''
-      editor.setValue('')
-    },)
+    let { deleteArticle } = this.props
+    deleteArticle(id)
+    editor.setValue('')
+    this.refs.title.value = ''
   }
 
   // 更新文章
   updateArticle(id, title, content) {
+    let { updateArticle } = this.props
+    let editor = this.state.editor
     let article = {
       id: id,
       title, title,
       content: content,
     }
-    fetchAPI('/api/article/', {method: "PUT", data: article}, (data) => {
-      this.getAllArticle()
-    })
+    updateArticle(article)
+    editor.setValue(content)
+    this.refs.title.value = title
   }
 
   // 点击已存在的文章时现实文章内容
-  clickArticle(article) {
+  clickArticle(id) {
+
     // 获取simditor实例
     let { editor } = this.state
+    let { articleList, selectArticle } = this.props
+    let article = articleList.find(val => val._id === id)
     editor.setValue(article.content)
     this.refs.title.value = article.title
-    this.setState({
-      article
-    })
+    selectArticle(id) //
   }
 
   render() {
     // 获取文章列表 articleList
-    let { article, articleList, editor, toolbar } = this.state
-
+    let { article, articleList, editor, } = this.props
+    let toolbar =  [
+      {
+        text: '保存',
+        onclick: (id) => {
+          // 调用修改文章接口
+          this.updateArticle(article._id, this.refs.title.value, this.state.editor.getValue())
+        }
+      }, {
+        text: '删除',
+        onclick: (id) => {
+          // 删除接口
+          this.removeArticle(article._id)
+        }
+      }
+    ]
     if (!article) {
       article = articleList[0]  // 默认显示第一个文章，如果文章列表无文章则不显示
     }
@@ -138,7 +123,7 @@ class Article extends React.Component {
     if (article) {
       toolbar = toolbar.map((val) => {
         return (
-          <li key={val.text} onClick={val.onclick.bind(this, article)}>{val.text}</li>
+          <li key={val.text} onClick={val.onclick.bind(this)}>{val.text}</li>
         )
       })
     } else {
@@ -151,7 +136,7 @@ class Article extends React.Component {
       let formatTime = moment(val.datetime).format('YYYY-MM-DD')
 
       return (
-        <li className="clearfix" key={val._id} onClick={this.clickArticle.bind(this, val)}>
+        <li className="clearfix" key={val._id} onClick={this.clickArticle.bind(this, val._id)}>
           <h3 className="article-title">{val.title}</h3>
           <i className="article-datetime">{formatTime}</i>
         </li>

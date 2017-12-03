@@ -1,6 +1,9 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom'
+import { bindActionCreators, createStore, applyMiddleware } from 'redux'
+import { connect, Provider } from 'react-redux'
+import thunkMiddleware from 'redux-thunk'
 
 import Header from './components/header/header'
 import Containter from './components/container/container'
@@ -8,9 +11,24 @@ import Footer from './components/footer/footer'
 import Chat from './components/chat/chat'
 import Login from './page/login/login'
 
+/**
+ * 获取所有action与reducer
+ */
+import rootReducer from './reducer'
+import * as actionCreators from './action'
+
 import './app.scss'
 
-class App extends React.Component {
+/**
+ * 1. 添加thunk中间件，时action内部可以实现多次异步dispatch(例如新增与删除后再更新文章列表)
+ * 2. 通过createStore将reducer中的state合并为一个单独的state对象存储在store中，可通过store.getState()获取
+ */
+const store = applyMiddleware(
+  thunkMiddleware
+)(createStore)(rootReducer)
+console.log(store.getState())
+// !这个组件应该封装在component或者container中
+class Home extends React.Component {
   constructor() {
     super()
     this.state = {
@@ -35,15 +53,28 @@ class App extends React.Component {
   }
 }
 
+/**
+ * 增强App组件，通过connect方法可使组件得到获取store与actions的能力
+ */
+const App = connect(
+  state => ({ state }),
+  dispatch => ({
+    actions: bindActionCreators(actionCreators, dispatch)
+  })
+)(Home)
+
 const app = document.createElement('div')
 document.body.appendChild(app)
 
 ReactDOM.render(
-  <Router>
-    <div>
-      <Route exact path="/" component={App} />
-      <Route exact path="/login/:type" component={Login} />
-    </div>
-  </Router>,
+  <Provider store={ store }>
+    <Router>
+      <div>
+        <Route exact path="/" component={App} />
+        <Route exact path="/login/:type" component={Login} />
+      </div>
+    </Router>
+  </Provider>
+  ,
   app,
 )

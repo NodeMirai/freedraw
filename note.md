@@ -71,8 +71,15 @@ simple-loader|module|hotkeys: 看看是个啥东西再说
 ## 2017-12-03
 ### 使用fetch封装请求
 fetch封装认证请求完成
+
+### 使用redux重构流程
+1. react-redux中的provider与connect
+- provider负责将总的store传入到应用根组件中，通过connect与provider是每个组件都有获得store中state的能力
+
 ### 问题记录
 1. fetch中使用request body时需要主意，payload与form data对应两种不同的content-type，
    request payload使用application/json, form data使用application/x-www-form-urlencoded
    两种类型在request body中分别为__"{a:a, b:b}"与"a=a&b=b"__
 
+2. 为了使用react-redux中connect装饰器，babel新增preset: ["stage-0"], "plugins": ["transform-decorators-legacy"]
+    安装stage-0与transform-decorators-legacy插件

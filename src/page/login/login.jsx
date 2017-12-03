@@ -59,10 +59,12 @@ class Login extends React.Component {
   register() {
     let username = this.refs.registerUsername.value
     let password = this.refs.registerPassword.value
-    fetch(`/api/authenticate/`, {method: 'POST', body: {
+    fetch(`/api/authenticate/`, {method: 'POST',headers: {
+      'Content-type': 'application/json'
+    }, body: JSON.stringify({
       username: username,
       password: password,
-     }})
+     })})
       .then(res => res.json())
       .then(data => {
         alert(data.message)
@@ -80,10 +82,12 @@ class Login extends React.Component {
     let username = this.refs.loginUsername.value
     let password = this.refs.loginPassword.value
 
-    fetch(`/api/authenticate/`, {method: 'PUT', body: {
+    fetch(`/api/authenticate/`, {method: 'PUT',headers:{
+      'Content-type': 'application/json'
+    }, body: JSON.stringify({
       username: username,
       password: password,
-     }})
+     })})
       .then(res => res.json())
       .then(data => {
         /**
