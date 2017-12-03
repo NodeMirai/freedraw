@@ -1,5 +1,4 @@
 import React from 'react'
-import $ from 'jquery'
 import Simditor from 'simditor'
 import 'style-loader!css-loader!../../../node_modules/simditor/styles/simditor.css'
 import './article.scss'

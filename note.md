@@ -74,3 +74,5 @@ fetch封装认证请求完成
 ### 问题记录
 1. fetch中使用request body时需要主意，payload与form data对应两种不同的content-type，
    request payload使用application/json, form data使用application/x-www-form-urlencoded
+   两种类型在request body中分别为__"{a:a, b:b}"与"a=a&b=b"__
+

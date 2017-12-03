@@ -2,8 +2,6 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import './header.scss'
 
-import $ from 'jquery'
-
 let client_id = 1106547932
 let redirect_uri = 'http%3A%2F%2Fnodemirai.com'
 let state = 'test'
