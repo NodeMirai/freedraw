@@ -68,6 +68,9 @@ simple-loader|module|hotkeys: 看看是个啥东西再说
 ### webpack优化插件使用
 - CommonsChunkPlugin 将公共模块单独抽出，需要在webpack中配置多个entry
 
-## 2017-11-26
+## 2017-12-03
+### 使用fetch封装请求
+fetch封装认证请求完成
 ### 问题记录
-1. exact作用是什么，为何不使用就不跳转
+1. fetch中使用request body时需要主意，payload与form data对应两种不同的content-type，
+   request payload使用application/json, form data使用application/x-www-form-urlencoded

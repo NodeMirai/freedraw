@@ -3,8 +3,6 @@ import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import './login.scss'
 
-import $ from 'jquery'
-
 // 用户名与密码必填且合法校验
 const propTypes = {
 }
@@ -36,58 +34,58 @@ class Login extends React.Component {
 
   // 失去焦点后查询用户名是否重复，重复则提示
   checkUsername() {
-    let username = this.refs.loginUsername.value
-    $.get(`/api/authenticate/${username}`, (data, status) => {
-      if (data.status === 200) {
+    let username = this.refs.registerUsername.value
+    fetch(`/api/authenticate/${username}`)
+      .then(res => res.json())
+      .then(data => {
         if (data.data) {
           this.setState({
             isUsernameRepeat: true
           })
-        } else[
+        } else {
           this.setState({
             isUsernameRepeat: false
           })
-        ]
-      } else {
+        }
+      })
+      .catch(err => {
+        console.error(err)
         this.setState({
           isUsernameRepeat: false
         })
-      }
-    })
+      })
   }
 
   register() {
-    let username = this.refs.loginUsername.value
-    let password = this.refs.password.value
-    $.ajax({
-      url: '/api/authenticate/',
-      type: 'POST',
-      dataType: 'json',
-      data: {
-        username: username,
-        password: password,
-      },
-      success: (data) => {
+    let username = this.refs.registerUsername.value
+    let password = this.refs.registerPassword.value
+    fetch(`/api/authenticate/`, {method: 'POST', body: {
+      username: username,
+      password: password,
+     }})
+      .then(res => res.json())
+      .then(data => {
         alert(data.message)
         this.refs.loginUsername.value = ''
         this.refs.password.value = ''
         // 跳转至首页
         window.location.href = '/'
-      },
-    })
+      })
+      .catch(err => {
+        console.error(err)
+      })
   }
 
   login() {
     let username = this.refs.loginUsername.value
     let password = this.refs.loginPassword.value
-    $.ajax({
-      url: '/api/authenticate',
-      data: {
-        username: username,
-        password: password,
-      },
-      type: 'PUT',
-      success: (data) => {
+
+    fetch(`/api/authenticate/`, {method: 'PUT', body: {
+      username: username,
+      password: password,
+     }})
+      .then(res => res.json())
+      .then(data => {
         /**
          * 登陆成功后将获取的token存在localstorage中，用于判断登陆状态
          * 同时跳转至首页
@@ -95,8 +93,8 @@ class Login extends React.Component {
         let token = data.token
         localStorage.setItem('token', token)
         location.href = '/'
-      },
-    })
+      })
+      .catch(err => console.error(err))
   }
 
   render() {

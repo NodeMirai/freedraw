@@ -7,6 +7,8 @@ import './article.scss'
 import moment from 'moment'
 import config from '../../../config'
 
+import fetchAPI from '../../share/util/fetchAPI'
+
 class Article extends React.Component {
   constructor() {
     super()
@@ -54,8 +56,9 @@ class Article extends React.Component {
 
   // 查询全部文章
   getAllArticle() {
+
     // 调用查询文章列表接口
-    $.get('/api/article/', (data, status) => {
+    fetchAPI('/api/article/', { method: "GET" }, (data) => {
       if (data.status === 200) {
         this.setState({
           articleList: data.data || []
@@ -74,7 +77,7 @@ class Article extends React.Component {
       type: '',
       datetime: moment().format('YYYY-MM-DD')
     }
-    $.post('/api/article/', article, (data, status) => {
+    fetchAPI('/api/article/', { method: "POST", data: article }, (data) => {
       if (data.status === 200) {
         // 添加完成后获取最新列表
         this.getAllArticle()
@@ -94,32 +97,22 @@ class Article extends React.Component {
   // 删除文章
   removeArticle(id) {
     let editor = this.state.editor
-    $.ajax({
-      type: 'DELETE',
-      url: `/api/article/${id}`,
-      dataType: 'json',
-      success: (data) => {
-        this.getAllArticle()
-        this.refs.title.value = ''
-        editor.setValue('')
-      },
-    })
+    fetchAPI(`/api/article/${id}`, {method: "DELETE"}, (data) => {
+      this.getAllArticle()
+      this.refs.title.value = ''
+      editor.setValue('')
+    },)
   }
 
   // 更新文章
   updateArticle(id, title, content) {
-    $.ajax({
-      type: 'PUT',
-      url: `/api/article/`,
-      data: {
-        id: id,
-        title, title,
-        content: content,
-      },
-      dataType: 'json',
-      success: (data) => {
-        this.getAllArticle()
-      },
+    let article = {
+      id: id,
+      title, title,
+      content: content,
+    }
+    fetchAPI('/api/article/', {method: "PUT", data: article}, (data) => {
+      this.getAllArticle()
     })
   }
 

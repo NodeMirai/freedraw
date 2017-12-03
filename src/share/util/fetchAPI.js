@@ -12,14 +12,17 @@ const token = localStorage.getItem('token')
  * @param {*} options 配置信息，包括method,headers,data(GET HEAD下不可使用)
  * @param {*} callback 获取数据成功后的回调
  */
-export default fetchAPI = (url, options, callback ) => {
+export default (url, options, callback ) => {
   let init = {
     method: options.method,
+    headers: {
+      Authorization: token,
+      'Content-type': 'application/json',  //  使用form data时content-type必须为application/x-www-form-urlencoded
+    },
   }
 
   // 仅当数据存在时赋值，不存在则不尽兴添加
-  options.headers && (init.headers = options.headers)
-  options.data && (init.data = options.data)
+  options.data && (init.body = JSON.stringify(options.data))
 
   fetch(url, init)
     .then(res => res.json())
