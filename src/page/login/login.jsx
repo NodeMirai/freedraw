@@ -1,71 +1,46 @@
 import React from 'react'
+import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import './login.scss'
-
+import loginService from './login.service'
 // 用户名与密码必填且合法校验
 const propTypes = {
 }
 
+@connect(
+  (loginData) => (loginData.login),
+  require('../../action/login'),
+)
 class Login extends React.Component {
   constructor(props) {
     super(props)
     let type = parseInt(props.match.params.type, 10)
-    this.state = {
-      username: '',      //  登陆状态
-      password: '',
-      type: type,  // 1:登陆 2:注册
-      isUsernameRepeat: false,
-    }
+    let changeType = props.changeType
+    changeType(type)
   }
 
   changeTab() {
-    let type = this.state.type
+    let { type, changeType} = this.props
     if (type === 2) {
-      this.setState({
-        type: 1
-      })
+      changeType(1)
     } else {
-      this.setState({
-        type: 2
-      })
+      changeType(2)
     }
   }
 
   // 失去焦点后查询用户名是否重复，重复则提示
   checkUsername() {
     let username = this.refs.registerUsername.value
-    fetch(`/api/authenticate/${username}`)
-      .then(res => res.json())
-      .then(data => {
-        if (data.data) {
-          this.setState({
-            isUsernameRepeat: true
-          })
-        } else {
-          this.setState({
-            isUsernameRepeat: false
-          })
-        }
-      })
-      .catch(err => {
-        console.error(err)
-        this.setState({
-          isUsernameRepeat: false
-        })
-      })
+    let { checkUsername } = this.props
+    checkUsername(username)
   }
 
   register() {
     let username = this.refs.registerUsername.value
     let password = this.refs.registerPassword.value
-    fetch(`/api/authenticate/`, {method: 'POST',headers: {
-      'Content-type': 'application/json'
-    }, body: JSON.stringify({
-      username: username,
-      password: password,
-     })})
-      .then(res => res.json())
+    let { register } = this.props
+    loginService(username, password)
       .then(data => {
         alert(data.message)
         this.refs.loginUsername.value = ''
@@ -73,7 +48,7 @@ class Login extends React.Component {
         // 跳转至首页
         window.location.href = '/'
       })
-      .catch(err => {
+      .catch(() => {
         console.error(err)
       })
   }
@@ -82,13 +57,7 @@ class Login extends React.Component {
     let username = this.refs.loginUsername.value
     let password = this.refs.loginPassword.value
 
-    fetch(`/api/authenticate/`, {method: 'PUT',headers:{
-      'Content-type': 'application/json'
-    }, body: JSON.stringify({
-      username: username,
-      password: password,
-     })})
-      .then(res => res.json())
+    loginService.login(username, password)
       .then(data => {
         /**
          * 登陆成功后将获取的token存在localstorage中，用于判断登陆状态
@@ -102,7 +71,7 @@ class Login extends React.Component {
   }
 
   render() {
-    let { type, isUsernameRepeat } = this.state
+    let { type, isUsernameRepeat } = this.props
 
     let tabContent = type === 2 ?
       (
@@ -145,7 +114,7 @@ class Login extends React.Component {
               <a className={type === 2 ? 'clicked' : 'unclicked'} onClick={() => this.changeTab()}>注册</a>
             </h3>
           </div>
-          { tabContent }
+          {tabContent}
         </div>
       </div>
     )
