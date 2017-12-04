@@ -26,7 +26,7 @@ import './app.scss'
 const store = applyMiddleware(
   thunkMiddleware
 )(createStore)(rootReducer)
-console.log(store.getState())
+
 // !这个组件应该封装在component或者container中
 class Home extends React.Component {
   constructor() {
