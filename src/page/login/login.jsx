@@ -3,14 +3,14 @@ import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import './login.scss'
-import loginService from './login.service'
+import * as loginService from './login.service'
 // 用户名与密码必填且合法校验
 const propTypes = {
 }
 
 @connect(
   (loginData) => (loginData.login),
-  require('../../action/login'),
+  require('../../redux/action/login'),
 )
 class Login extends React.Component {
   constructor(props) {
@@ -40,7 +40,7 @@ class Login extends React.Component {
     let username = this.refs.registerUsername.value
     let password = this.refs.registerPassword.value
     let { register } = this.props
-    loginService(username, password)
+    loginService.register(username, password)
       .then(data => {
         alert(data.message)
         this.refs.loginUsername.value = ''
@@ -65,7 +65,10 @@ class Login extends React.Component {
          */
         let token = data.token
         localStorage.setItem('token', token)
+        localStorage.setItem('avatar', "https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=1870247392,1316906891&fm=27&gp=0.jpg")
         location.href = '/'
+        // 存储用户信息至localStorage中，例如用户头像
+
       })
       .catch(err => console.error(err))
   }

@@ -2,12 +2,35 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import './header.scss'
 
-let client_id = 1106547932
-let redirect_uri = 'http%3A%2F%2Fnodemirai.com'
-let state = 'test'
+function signout() {
+  localStorage.setItem('token', '')
+  location.href = '/'
+}
 
 // 无状态函数组件
 function Navbar(props) {
+  let token = localStorage.getItem('token')
+  let avatar = localStorage.getItem('avatar')
+  let user = token ? (
+    // 个人头像加下拉列表：消息，收藏，个人中心，退出登陆
+    <div className="user">
+      <img className="user--avatar" src={avatar}/>
+      <ul className="user--menu">
+        <li><a>个人中心</a></li>
+        <li><a>收藏</a></li>
+        <li><a>消息</a></li>
+      </ul>
+      <a className="user-signout" onClick={()=> signout()} href="#">退出登陆</a>
+    </div>
+
+  ) : (
+      <div className="login-btn-group">
+        <Link to="/login/1">登陆</Link>
+        {/* 这里需要路由传值 */}
+        <Link to="/login/2">注册</Link>
+      </div>
+    )
+
   return (
     <header className="clearfix">
       <div className="header-wrap">
@@ -32,11 +55,7 @@ function Navbar(props) {
           <i className="fa fa-search"></i>
         </form>
 
-        <div className="login-btn-group">
-          <Link to="/login/1">登陆</Link>
-          {/* 这里需要路由传值 */}
-          <Link to="/login/2">注册</Link>
-        </div>
+        { user }
       </div>
 
     </header>

@@ -7,8 +7,6 @@ const initialState = {
   isUsernameRepeat: false,
 }
 
-console.log(loginAction)
-
 export default (state = initialState, action) => {
   switch (action.type) {
     case loginAction.CHECK_USERNAME:

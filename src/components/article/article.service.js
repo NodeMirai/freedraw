@@ -11,7 +11,7 @@ export function getAllArticle() {
       if (data.status === 200) {
         resolve(data.data || [])
       } else {
-        reject()
+        reject('hehe')
       }
     })
   })

@@ -23,7 +23,7 @@ export function register(username, password) {
 }
 
 export function login(username, password) {
-  return Promise((resolve, reject) => {
+  return new Promise((resolve, reject) => {
     fetch(`/api/authenticate/`, {
       method: 'PUT',
       headers: {
@@ -34,11 +34,18 @@ export function login(username, password) {
         password: password,
       })
     })
-    .then(res => res.json())
-    .then(data => {
-      resolve(data)
-    })
-    .catch(err => reject(err))
+      .then(res => {
+        console.log(res)
+        return res.json()
+      })
+      .then(data => {
+        if (data.status === 200) {
+          resolve(data)
+        } else {
+          reject('报错')
+        }
+      })
+      .catch(err => console.error(err))
   })
 }
 
@@ -47,7 +54,7 @@ export function checkname(username) {
     fetch(`/api/authenticate/${username}`)
       .then(res => res.json())
       .then(data => {
-        if (data.data) {
+        if (data.status === 200) {
           resolve()
         } else {
           reject()

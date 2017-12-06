@@ -16,12 +16,11 @@ import * as articleService from './article.service'
  */
 @connect(
   (articleData) => (articleData.article),
-  require('../../action/article')
+  require('../../redux/action/article')
 )
 class Article extends React.Component {
   constructor(props) {
     super(props)
-    console.log(props)
   }
 
   componentWillMount() {

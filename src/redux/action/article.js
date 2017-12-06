@@ -4,7 +4,7 @@
  * action creator参数主要用来传给state，因此在设计参数时需要知道每个行为对state的影响
  * 然后再考虑传递参数
  */
-import * as articleService from '../components/article/article.service'
+import * as articleService from '../../components/article/article.service'
 
 export const GET_ARTICLE = 'GET_ARTICLE'
 export const ADD_ARTICLE = 'ADD_ARTICLE'
@@ -17,9 +17,11 @@ function getDisArticle(articleList) {
 }
 
 export function getArticle() {
-  return dispatch => {
-    articleService.getAllArticle().then(articleList => dispatch(getDisArticle(articleList)))
-  }
+  return dispatch =>
+    articleService.getAllArticle()
+      .then(articleList => dispatch(getDisArticle(articleList)))
+      .catch(err => console.error(err))
+
 }
 
 // 新增后需要通过dispatch处罚GET_ARTICLE ACTION

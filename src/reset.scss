@@ -1,4 +1,4 @@
-$fontSize: 10px;
+$fontSize: 12px;
 
 html {
     font-size: $fontSize;
@@ -11,4 +11,9 @@ body {
 
 ul li {
     list-style: none;
+}
+
+ul {
+    margin: 0;
+    padding: 0;
 }

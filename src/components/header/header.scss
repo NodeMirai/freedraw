@@ -24,7 +24,7 @@ header {
                 display: inline;
                 padding: 1rem 2rem;
                 &:hover {
-                    background: #ccc;
+                    background-color: #ccc;
                     color: #fff;
                     cursor: pointer;
                 }
@@ -54,12 +54,62 @@ header {
                 cursor: pointer;
             }
         }
+        /* 登陆前 */
         .login-btn {
             background: url('/img/qq_login.png');
             width: 100px;
             height: 20px;
             display: inline-block;
             cursor: pointer;
+        }
+        /* 登陆后 */
+        .user {
+            position: absolute;
+            top: 0;
+            right: 10rem;
+            .user--avatar {
+                &:hover + .user--menu {
+                    display: block;
+                }
+                width: 4rem;
+                height: 4rem;
+                border-radius: 50%;
+                padding: 1.5rem;
+                vertical-align: bottom;
+            }
+            .user-signout {
+                display: inline-block;
+                line-height: 7rem;
+            }
+            .user--menu {
+                &::before {
+                    content: '';
+                    display: block;
+                    border: 4px solid transparent;
+                    border-bottom: 2px solid #fff;
+                }
+                display: block;
+                position: absolute;
+                width: 80%;
+                top: 7rem;
+                box-shadow: 0 1rem 1rem rgba(0,0,0,.175);
+                li {
+                    &:hover {
+                        background-color: #eee;
+                        cursor: pointer;
+                    }
+                    padding: 0 1rem;
+                    a {
+                        display: block;
+                        padding: 1rem;
+                        border-bottom: 1px solid #eee;
+                    }
+                    &:last-child a {
+                        display: inline-block;
+                        border: none;
+                    }
+                }
+            }
         }
     }
 }

@@ -83,3 +83,9 @@ fetch封装认证请求完成
 
 2. 为了使用react-redux中connect装饰器，babel新增preset: ["stage-0"], "plugins": ["transform-decorators-legacy"]
     安装stage-0与transform-decorators-legacy插件
+
+## 2017-12-06
+### 登陆成功后的用户头像与下拉框
+### 首页展示区与用户中心编辑（抄网易漫画）
+### 用户中心（填充个人信息，上传个人资源）
+

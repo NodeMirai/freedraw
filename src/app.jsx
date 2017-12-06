@@ -14,8 +14,8 @@ import Login from './page/login/login'
 /**
  * 获取所有action与reducer
  */
-import rootReducer from './reducer'
-import * as actionCreators from './action'
+import rootReducer from './redux/reducer'
+import * as actionCreators from './redux/action'
 
 import './app.scss'
 
