@@ -57,7 +57,6 @@ function Navbar(props) {
 
         { user }
       </div>
-
     </header>
   )
 }

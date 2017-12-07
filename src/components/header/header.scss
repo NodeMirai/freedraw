@@ -1,5 +1,11 @@
+$header-height: 7rem;
+
+$white: #fff;
+
+$header-wrap-bg-color: $white;
+
 header {
-    height: 7rem;
+    height: $header-height;
     margin-bottom: 4rem;
     .header-wrap {
         padding: 0 5%;
@@ -9,31 +15,16 @@ header {
         z-index: 999;
         width: 100%;
         box-sizing: border-box;
-        background: #fff;
+        background: $header-wrap-bg-color;
         .title {
             float: left;
             padding-left: 3rem;
         }
-        .nav-top {
-            height: 100%;
-            line-height: 4rem;
-            font-size: 16px;
-            padding-left: 6rem;
-            display: inline-block;
-            ul > li {
-                display: inline;
-                padding: 1rem 2rem;
-                &:hover {
-                    background-color: #ccc;
-                    color: #fff;
-                    cursor: pointer;
-                }
-            }
-        }
+
         .login-btn-group {
             float: right;
             width: 20rem;
-            line-height: 7rem;
+            line-height: $header-height;
             text-align: center;
         }
         .search-form {
@@ -62,53 +53,72 @@ header {
             display: inline-block;
             cursor: pointer;
         }
-        /* 登陆后 */
-        .user {
-            position: absolute;
-            top: 0;
-            right: 10rem;
-            .user--avatar {
-                &:hover + .user--menu {
-                    display: block;
-                }
-                width: 4rem;
-                height: 4rem;
-                border-radius: 50%;
-                padding: 1.5rem;
-                vertical-align: bottom;
+
+    }
+}
+
+.nav-top {
+    height: 100%;
+    line-height: 4rem;
+    font-size: 16px;
+    padding-left: 6rem;
+    display: inline-block;
+    ul > li {
+        display: inline;
+        padding: 1rem 2rem;
+        &:hover {
+            background-color: #ccc;
+            color: #fff;
+            cursor: pointer;
+        }
+    }
+}
+
+/* 登陆后 */
+.user {
+    position: absolute;
+    top: 0;
+    right: 10rem;
+    .user--avatar {
+        &:hover + .user--menu {
+            display: block;
+        }
+        width: 4rem;
+        height: 4rem;
+        border-radius: 50%;
+        padding: 1.5rem;
+        vertical-align: bottom;
+    }
+    .user-signout {
+        display: inline-block;
+        line-height: $header-height;
+    }
+    .user--menu {
+        &::before {
+            content: '';
+            display: block;
+            border: 4px solid transparent;
+            border-bottom: 2px solid #fff;
+        }
+        display: block;
+        position: absolute;
+        width: 80%;
+        top: $header-height;
+        box-shadow: 0 1rem 1rem rgba(0,0,0,.175);
+        li {
+            &:hover {
+                background-color: #eee;
+                cursor: pointer;
             }
-            .user-signout {
-                display: inline-block;
-                line-height: 7rem;
-            }
-            .user--menu {
-                &::before {
-                    content: '';
-                    display: block;
-                    border: 4px solid transparent;
-                    border-bottom: 2px solid #fff;
-                }
+            padding: 0 1rem;
+            a {
                 display: block;
-                position: absolute;
-                width: 80%;
-                top: 7rem;
-                box-shadow: 0 1rem 1rem rgba(0,0,0,.175);
-                li {
-                    &:hover {
-                        background-color: #eee;
-                        cursor: pointer;
-                    }
-                    padding: 0 1rem;
-                    a {
-                        display: block;
-                        padding: 1rem;
-                        border-bottom: 1px solid #eee;
-                    }
-                    &:last-child a {
-                        display: inline-block;
-                        border: none;
-                    }
-                }
+                padding: 1rem;
+                border-bottom: 1px solid #eee;
+            }
+            &:last-child a {
+                display: inline-block;
+                border: none;
             }
         }
     }

@@ -1,38 +1,33 @@
+$tab__head--active-color: #ea6f5a;
+$radius-login: 3px;
+$radius-tab__content__button: 1rem;
 .login {
-    width: 20rem;
-    height: 30rem;
-    /* 固定宽高垂直居中  */
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    margin-left: -10rem;
-    margin-top: -20rem;
+    @extend %all-center;
     border: 1px solid lightblue;
-    border-radius: 3px;
+    border-radius: $radius-login;
     padding: 1rem 2rem;
     h1 {
         text-align: center;
     }
     .tab-head {
         h3 {
+            font-size: 2rem;
             text-align: center;
+            cursor: pointer;
             .clicked,
             .unclicked {
                 display: inline-block;
-                font-size: 2rem;
                 margin: 1rem 2rem;
-                cursor: pointer;
             }
             .clicked {
-                border-bottom: 2px solid #ea6f5a;
-                color: #ea6f5a;
+                border-bottom: 2px solid $tab__head--active-color;
+                color: $tab__head--active-color;
             }
         }
     }
     .tab-content {
         button {
             display: block;
-            width: 100%;
         }
         .username, .password {
             border: 1px solid #c8c8c8;
@@ -57,10 +52,21 @@
         button {
             margin-top: 1rem;
             padding: .5rem 2rem;
-            border-radius: 1rem;
+            border-radius: $radius-tab__content__button;
             &:focus {
                 outline: none;
             }
         }
     }
+}
+
+/* 固定宽高垂直居中  */
+%all-center {
+    width: 20rem;
+    height: 30rem;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-left: -10rem;
+    margin-top: -20rem;
 }
