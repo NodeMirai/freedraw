@@ -100,3 +100,11 @@ fetch封装认证请求完成
 Storage其他用法：
 1. addEventListener(storage, (e) => console.log(e))：storage对象内的值的创建/修改/删除都会出发该事件，创建重复键值不会出发，clear仅触发一次
 2. storage的作用域为当前页面协议，即a.com下的storage在b.com下是访问不到的
+### 整理article中action与reducer，删除不影响状态变更的部分
+1. render中触发action时需要主意是否存在无限循环触发的情况(action会出发render更新，而render内部又调用action)
+
+### 问题记录
+1. react中编写action时可能会出现action与action之间连续调用的情况，导致频繁调用render，是否是否有办法可以一次性render
+方案：为删除添加心得action，一次性获取并更新，即__当有一个行为触发了多个action时，需要为它单独写一个action来避免多次render__
+删除文章：删除后需要即使更新当前文章id
+2. react中首次加载时由于render在componentDidMount之前，导致this.refs无法获取，此时无法设置值

@@ -6,7 +6,7 @@ import * as articleAction from '../action/article'
  */
 const initialState = {
   articleList: [],
-  article: '',   // 当前选中文章
+  currentId: '',   // 当前选中文章
 }
 
 /**
@@ -16,14 +16,8 @@ export default (state = initialState, action) => {
   switch (action.type) {
     case articleAction.GET_ARTICLE:
       return Object.assign({}, state, { articleList: action.articleList } )
-    case articleAction.ADD_ARTICLE:
-      return Object.assign({}, state,)
     case articleAction.SELECT_ARTICLE:
-      return Object.assign({}, state, { selectId: action.id })
-    case articleAction.UPDATE_ARTICLE:
-      return Object.assign({}, state, action.article )
-    case articleAction.DELETE_ARTICLE:
-      return Object.assign({}, state, action.id)
+      return Object.assign({}, state, { currentId: action.id })
     default:
       return state
   }

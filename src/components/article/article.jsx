@@ -24,144 +24,148 @@ class Article extends React.Component {
   }
 
   componentWillMount() {
-
+    let { getArticle } = this.props
+    getArticle()
   }
 
-  // 模版渲染完成后开始渲染初始数据
   componentDidMount() {
-    let { editor, getArticle } = this.props
-    // 查找textarea dom
-    editor = new Simditor({
+    let editor = new Simditor({
       textarea: this.refs.article
     })
     this.setState({
       editor
     })
-    getArticle()
   }
 
-  // 新增文章
   addArticle() {
-    let { addArticle } = this.props
+    let { getArticle } = this.props
     let article = {
       title: '无',
       content: '',
       type: '',
       datetime: moment().format('YYYY-MM-DD')
     }
-    addArticle(article)
+    articleService
+      .addArticle(article)
+      .then(() => getArticle())
   }
 
   // 初始化当前文章状态
   initArticle() {
-    let { article } = this.props
     let editor = this.state.editor
     // 清空title与editor
     this.refs.title.value = ''
     editor.setValue('')
   }
 
-  // 删除文章
   removeArticle(id) {
+    let { getArticle, selectArticle } = this.props
     let editor = this.state.editor
-    let { deleteArticle } = this.props
-    deleteArticle(id)
-    editor.setValue('')
-    this.refs.title.value = ''
+    articleService
+      .removeArticle(id)
+      .then(() => {
+        selectArticle('')
+        this.initArticle()
+        getArticle()
+      })
+
   }
 
-  // 更新文章
   updateArticle(id, title, content) {
-    let { updateArticle } = this.props
+    let { getArticle } = this.props
     let editor = this.state.editor
     let article = {
       id: id,
       title, title,
       content: content,
     }
-    updateArticle(article)
+    articleService
+      .updateArticle(article)
+      .then(() => getArticle())
     editor.setValue(content)
     this.refs.title.value = title
   }
 
-  // 点击已存在的文章时现实文章内容
   clickArticle(id) {
-
-    // 获取simditor实例
     let { editor } = this.state
     let { articleList, selectArticle } = this.props
     let article = articleList.find(val => val._id === id)
+
+    selectArticle(id)
+
     editor.setValue(article.content)
     this.refs.title.value = article.title
-    selectArticle(id) //
+    console.log(id)
   }
 
   render() {
-    // 获取文章列表 articleList
-    let { article, articleList, editor, } = this.props
-    let toolbar =  [
-      {
-        text: '保存',
-        onclick: (id) => {
-          // 调用修改文章接口
-          this.updateArticle(article._id, this.refs.title.value, this.state.editor.getValue())
-        }
-      }, {
-        text: '删除',
-        onclick: (id) => {
-          // 删除接口
-          this.removeArticle(article._id)
-        }
+    let { currentId, articleList, selectArticle } = this.props
+    let currentArticle = {}, toolbar = []
+
+    if (articleList.length > 0) {
+      if (!currentId) {
+        currentArticle = articleList[0]
+        currentId = currentArticle._id
+      } else {
+        currentArticle = articleList.find(val => val._id === currentId)
       }
-    ]
-    if (!article) {
-      article = articleList[0]  // 默认显示第一个文章，如果文章列表无文章则不显示
+      this.refs.title.value = currentArticle.title
+      this.refs.article.value = currentArticle.content
+      toolbar = [
+        {
+          text: '保存',
+          onclick: (id) => {
+            this.updateArticle(id, this.refs.title.value, this.refs.article.value)
+          }
+        }, {
+          text: '删除',
+          onclick: (id) => {
+            this.removeArticle(id)
+          }
+        }
+      ]
     }
-
-    // 工具栏数据,当点击文章后才会出现
-    if (article) {
-      toolbar = toolbar.map((val) => {
-        return (
-          <li key={val.text} onClick={val.onclick.bind(this)}>{val.text}</li>
-        )
-      })
-    } else {
-      toolbar = []
-    }
-
-    // 文章列表数据
-    articleList = articleList.map((val) => {
-      // datetime时间格式化
-      let formatTime = moment(val.datetime).format('YYYY-MM-DD')
-
-      return (
-        <li className="clearfix" key={val._id} onClick={this.clickArticle.bind(this, val._id)}>
-          <h3 className="article-title">{val.title}</h3>
-          <i className="article-datetime">{formatTime}</i>
-        </li>
-      )
-    })
 
     return (
       <section id="article">
+
         <section className="article-list">
           <a className="add-article" onClick={this.addArticle.bind(this)}>
             <i className="fa fa-plus-circle" style={{ marginRight: .5 + 'rem' }}></i>新建文章
           </a>
           <ul className="list p0 m0">
-            {articleList}
+            {
+              articleList.map((val) => {
+                // datetime时间格式化
+                let formatTime = moment(val.datetime).format('YYYY-MM-DD')
+
+                return (
+                  <li className="clearfix" key={val._id} onClick={this.clickArticle.bind(this, val._id)}>
+                    <h3 className="article-title">{val.title}</h3>
+                    <i className="article-datetime">{formatTime}</i>
+                  </li>
+                )
+              })
+            }
           </ul>
         </section>
+
         <form className="editor-area">
           <input className="editor-title" name="title" type="text" ref="title" defaultValue="" placeholder="请输入标题" />
           <ul className="toolbar clearfix m0">
-            {/* 操作工具栏，后期需要支持word或者excel导入导出，以及其他扩展功能，需要保存在状态中 */}
-            {toolbar}
+            {
+              toolbar.map((val) => {
+                return (
+                  <li key={val.text} onClick={val.onclick.bind(this, currentId)}>{val.text}</li>
+                )
+              })
+            }
           </ul>
           <div className="editor">
-            <textarea ref="article" defaultValue=""></textarea>
+            <textarea ref="article" defaultValue="" ></textarea>
           </div>
         </form>
+
       </section>
     )
   }
