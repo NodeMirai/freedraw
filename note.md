@@ -89,3 +89,14 @@ fetch封装认证请求完成
 ### 首页展示区与用户中心编辑（抄网易漫画）
 ### 用户中心（填充个人信息，上传个人资源）
 
+## 2017-12-07
+### sass部分重构原则
+1. 变量名称命名要有规则(例如BEM)，实体--标示
+2. 使用%placeholder代替Mixin(placeholder解析后会变成样式类的共有部分，而Mixin会直接copy导致重复)
+3. 嵌套不要超过3层，超过时进行分离(部分样式也可以考虑采用盒模型方式使用%placeholder封装出去)
+
+## 2017-12-08
+### token失效后清空token
+Storage其他用法：
+1. addEventListener(storage, (e) => console.log(e))：storage对象内的值的创建/修改/删除都会出发该事件，创建重复键值不会出发，clear仅触发一次
+2. storage的作用域为当前页面协议，即a.com下的storage在b.com下是访问不到的

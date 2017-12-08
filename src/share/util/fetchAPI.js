@@ -4,7 +4,7 @@
  */
 
  // 获取token，用于每次请求认证
-const token = localStorage.getItem('token')
+const token = sessionStorage.getItem('token')
 
 /**
  * fetch接口封装
@@ -27,8 +27,14 @@ export default (url, options, callback ) => {
   fetch(url, init)
     .then(res => res.json())
     .then(data => {
-      callback(data)
+      if (data.status === 200)
+        callback(data)
+      else if (data.status === 403)
+        // token失效后处理
+        console.log(data.message)
     })
-    .catch(err => console.error(err))
+    .catch(err => {
+      console.error(err)
+    })
 
 }

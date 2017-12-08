@@ -3,14 +3,14 @@ import { Link } from 'react-router-dom'
 import './header.scss'
 
 function signout() {
-  localStorage.setItem('token', '')
+  sessionStorage.setItem('token', '')
   location.href = '/'
 }
 
 // 无状态函数组件
 function Navbar(props) {
-  let token = localStorage.getItem('token')
-  let avatar = localStorage.getItem('avatar')
+  let token = sessionStorage.getItem('token')
+  let avatar = sessionStorage.getItem('avatar')
   let user = token ? (
     // 个人头像加下拉列表：消息，收藏，个人中心，退出登陆
     <div className="user">

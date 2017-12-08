@@ -8,7 +8,6 @@ import thunkMiddleware from 'redux-thunk'
 import Header from './components/header/header'
 import Containter from './components/container/container'
 import Footer from './components/footer/footer'
-import Chat from './components/chat/chat'
 import Login from './page/login/login'
 
 /**
@@ -46,7 +45,6 @@ class Home extends React.Component {
         </div>
         {/* <Contentnav /> */}
         <Containter />
-        <Chat />
         <Footer />
       </div>
     )
