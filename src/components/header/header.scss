@@ -1,59 +1,58 @@
+/*
+  以下变量需要添加到全局变量文件中
+*/
+
 $header-height: 7rem;
-
+$z-index-user--menu--avatar: 1000;
 $white: #fff;
-
 $header-wrap-bg-color: $white;
 
-header {
+.header-wrap {
     height: $header-height;
     margin-bottom: 4rem;
-    .header-wrap {
-        padding: 0 5%;
-        border-bottom: 1px solid #ccc;
-        position: fixed;
-        top: 0;
-        z-index: 999;
-        width: 100%;
-        box-sizing: border-box;
-        background: $header-wrap-bg-color;
-        .title {
-            float: left;
-            padding-left: 3rem;
-        }
-
-        .login-btn-group {
-            float: right;
+    position: fixed;
+    top: 0;
+    z-index: $z-index-user--menu--avatar;
+    width: 100%;
+    padding: 0 5%;
+    border-bottom: 1px solid #ccc;
+    box-sizing: border-box;
+    background: $header-wrap-bg-color;
+    .title {
+        float: left;
+        padding-left: 3rem;
+    }
+    .login-btn-group {
+        float: right;
+        width: 20rem;
+        line-height: $header-height;
+        text-align: center;
+    }
+    .search-form {
+        display: inline-block;
+        background: lightblue;
+        padding: 5px;
+        border-radius: 3px;
+        margin-left: 8rem;
+        input {
+            border: none;
+            background: transparent;
             width: 20rem;
-            line-height: $header-height;
-            text-align: center;
         }
-        .search-form {
-            display: inline-block;
-            background: lightblue;
-            padding: 5px;
-            border-radius: 3px;
-            margin-left: 8rem;
-            input {
-                border: none;
-                background: transparent;
-                width: 20rem;
-            }
-            & input:focus {
-                outline: none;
-            }
-            i:hover {
-                cursor: pointer;
-            }
+        & input:focus {
+            outline: none;
         }
-        /* 登陆前 */
-        .login-btn {
-            background: url('/img/qq_login.png');
-            width: 100px;
-            height: 20px;
-            display: inline-block;
+        i:hover {
             cursor: pointer;
         }
-
+    }
+    /* 登陆前 */
+    .login-btn {
+        background: url('/img/qq_login.png');
+        width: 100px;
+        height: 20px;
+        display: inline-block;
+        cursor: pointer;
     }
 }
 
@@ -63,7 +62,7 @@ header {
     font-size: 16px;
     padding-left: 6rem;
     display: inline-block;
-    ul > li {
+    ul>li {
         display: inline;
         padding: 1rem 2rem;
         &:hover {
@@ -74,15 +73,15 @@ header {
     }
 }
 
+
 /* 登陆后 */
+
 .user {
     position: absolute;
     top: 0;
     right: 10rem;
+    z-index: $z-index-user--menu--avatar;
     .user--avatar {
-        &:hover + .user--menu {
-            display: block;
-        }
         width: 4rem;
         height: 4rem;
         border-radius: 50%;
@@ -92,34 +91,5 @@ header {
     .user-signout {
         display: inline-block;
         line-height: $header-height;
-    }
-    .user--menu {
-        &::before {
-            content: '';
-            display: block;
-            border: 4px solid transparent;
-            border-bottom: 2px solid #fff;
-        }
-        display: none;
-        position: absolute;
-        width: 80%;
-        top: $header-height;
-        box-shadow: 0 1rem 1rem rgba(0,0,0,.175);
-        li {
-            &:hover {
-                background-color: #eee;
-                cursor: pointer;
-            }
-            padding: 0 1rem;
-            a {
-                display: block;
-                padding: 1rem;
-                border-bottom: 1px solid #eee;
-            }
-            &:last-child a {
-                display: inline-block;
-                border: none;
-            }
-        }
     }
 }

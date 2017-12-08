@@ -103,8 +103,21 @@ Storage其他用法：
 ### 整理article中action与reducer，删除不影响状态变更的部分
 1. render中触发action时需要主意是否存在无限循环触发的情况(action会出发render更新，而render内部又调用action)
 
+
+### 编写头像菜单
+1. layout弹出层占满全屏，并添加mouseenter时出发action，改变某字段值控制菜单显隐
+2. 头像与菜单z-index值大于弹出层，确保mouseenter时菜单保持显示状态
+3. header组件与menu组件需要共享isMenuShow状态值，因此需要redux管理
+
 ### 问题记录
 1. react中编写action时可能会出现action与action之间连续调用的情况，导致频繁调用render，是否是否有办法可以一次性render
 方案：为删除添加心得action，一次性获取并更新，即__当有一个行为触发了多个action时，需要为它单独写一个action来避免多次render__
 删除文章：删除后需要即使更新当前文章id
 2. react中首次加载时由于render在componentDidMount之前，导致this.refs无法获取，此时无法设置值
+3. __z-index的层数由元素最根元素决定__
+4. 仅有头像触发菜单，后期需要把退出登陆部分与头像分开在两个元素中，不可有公共父元素，并为菜单隐显添加transition显示
+5. transition对display无效，因此一般使用width，height，opacity代替，
+6. 如果目标元素中有链接之类那么推荐用visibility而不是opacity,因为opacity为0时链接仍可以被点击
+
+## 2017-12-09
+### page中添加个人中心页

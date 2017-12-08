@@ -9,6 +9,8 @@ import Header from './components/header/header'
 import Containter from './components/container/container'
 import Footer from './components/footer/footer'
 import Login from './page/login/login'
+import Layout from './share/component/layout/layout'
+import Menu from './share/component/menu/menu'
 
 /**
  * 获取所有action与reducer
@@ -32,6 +34,11 @@ class Home extends React.Component {
     super()
     this.state = {
       title: '万事不顺屋',
+      menuItem: [
+        '个人中心',
+        '收藏',
+        '消息'
+      ]
     }
   }
 
@@ -40,12 +47,11 @@ class Home extends React.Component {
     return (
       <div className="app">
         <Header title={title} />
-        <div style={{ paddingLeft: 5 + '%', marginTop: -3 + 'rem' }}>
-          <iframe frameBorder="no" border="0" marginWidth="0" marginHeight="0" width="298" height="52" src="//music.163.com/outchain/player?type=2&id=509728757&auto=0&height=32"></iframe>
-        </div>
         {/* <Contentnav /> */}
         <Containter />
         <Footer />
+        <Layout />
+        <Menu items={this.state.menuItem} />
       </div>
     )
   }
