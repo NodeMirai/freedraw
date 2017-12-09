@@ -13,7 +13,7 @@ import Menu from './share/component/menu/menu'
 import Login from './page/login/login'
 import UserCenter from './page/usercenter/usercenter'
 
-import * as highlevel from './share/highlevel/container'
+import * as highlevel from './share/highlevel/container/container'
 
 /**
  * 获取所有action与reducer

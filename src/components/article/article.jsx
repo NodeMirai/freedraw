@@ -95,7 +95,6 @@ class Article extends React.Component {
 
     editor.setValue(article.content)
     this.refs.title.value = article.title
-    console.log(id)
   }
 
   render() {

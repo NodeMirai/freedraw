@@ -19,7 +19,6 @@ function Content() {
       <Route exact path="/usercenter/audio" component={ Video} />
       <Route exact path="/usercenter/picture" component={Picture} />
       <Route exact path="/usercenter/video" component={ Video} />
-      <Chat />
     </section>
   )
 }

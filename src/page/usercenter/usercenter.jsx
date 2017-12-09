@@ -2,7 +2,7 @@ import React from 'react'
 
 import Header from '../../components/header/header'
 import Content from '../../components/content/content'
-import * as highlevel from '../../share/highlevel/container'
+import * as highlevel from '../../share/highlevel/container/container'
 
 import './usercenter.scss'
 
