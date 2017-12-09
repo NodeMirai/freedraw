@@ -8,9 +8,11 @@ import thunkMiddleware from 'redux-thunk'
 import Header from './components/header/header'
 import Containter from './components/container/container'
 import Footer from './components/footer/footer'
-import Login from './page/login/login'
 import Layout from './share/component/layout/layout'
 import Menu from './share/component/menu/menu'
+
+import Login from './page/login/login'
+import UserCenter from './page/usercenter/usercenter'
 
 /**
  * 获取所有action与reducer
@@ -47,7 +49,6 @@ class Home extends React.Component {
     return (
       <div className="app">
         <Header title={title} />
-        {/* <Contentnav /> */}
         <Containter />
         <Footer />
         <Layout />
@@ -74,8 +75,9 @@ ReactDOM.render(
   <Provider store={ store }>
     <Router>
       <div>
-        <Route exact path="/" component={App} />
-        <Route exact path="/login/:type" component={Login} />
+        <Route exact path="/" component={ App } />
+        <Route exact path="/login/:type" component={ Login } />
+        <Route path="/usercenter" component={ UserCenter } />
       </div>
     </Router>
   </Provider>

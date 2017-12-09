@@ -1,5 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import { Link } from 'react-router-dom'
+
 import * as menuAction from '../../../redux/action/menu'
 
 import './menu.scss'
@@ -10,7 +12,7 @@ function Menu(props) {
   return (
     <ul className="user--menu" style={{ display: menu.isMenuShow ? 'block' : 'none' }} onMouseEnter={showMenu.bind(null, true)} >
       {
-        items.map(val => <li key={val}><a>{ val }</a></li>)
+        items.map(val => <li key={val}><Link to="/usercenter">{ val }</Link></li>)
       }
     </ul>
   )
