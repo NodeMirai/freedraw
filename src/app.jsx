@@ -6,13 +6,14 @@ import { connect, Provider } from 'react-redux'
 import thunkMiddleware from 'redux-thunk'
 
 import Header from './components/header/header'
-import Containter from './components/container/container'
 import Footer from './components/footer/footer'
 import Layout from './share/component/layout/layout'
 import Menu from './share/component/menu/menu'
 
 import Login from './page/login/login'
 import UserCenter from './page/usercenter/usercenter'
+
+import * as highlevel from './share/highlevel/container'
 
 /**
  * 获取所有action与reducer
@@ -49,7 +50,7 @@ class Home extends React.Component {
     return (
       <div className="app">
         <Header title={title} />
-        <Containter />
+        { highlevel.highContainer() }
         <Footer />
         <Layout />
         <Menu items={this.state.menuItem} />

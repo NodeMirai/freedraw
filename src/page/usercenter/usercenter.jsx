@@ -1,7 +1,8 @@
 import React from 'react'
 
 import Header from '../../components/header/header'
-import Containter from '../../components/container/container'
+import Content from '../../components/content/content'
+import * as highlevel from '../../share/highlevel/container'
 
 import './usercenter.scss'
 
@@ -10,7 +11,8 @@ function UserCenter() {
   return (
     <div>
       <Header title={title} />
-      <Containter />
+      {/* <Containter /> */}
+      { highlevel.highContainer(<Content />) }
     </div>
   )
 }
