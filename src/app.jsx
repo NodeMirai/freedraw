@@ -11,6 +11,8 @@ import Navbar from './component/navbar/navbar'
 import Layout from './share/component/layout/layout'
 import Menu from './share/component/menu/menu'
 
+import LivingRoom from './component/livingroom/livingroom'
+
 import Login from './page/login/login'
 import UserCenter from './page/usercenter/usercenter'
 
@@ -52,7 +54,7 @@ class Home extends React.Component {
       <div className="app">
         <Header title={title} />
         <Navbar />
-        { highlevel.highContainer() }
+        { highlevel.highContainer(<LivingRoom />) }
         <Footer />
         <Layout />
         <Menu items={this.state.menuItem} />

@@ -1,8 +1,11 @@
 import * as articleAction from './article'
 import * as loginAction from './login'
 import * as menuAction from './menu'
+import * as livingroomAction from './livingroom'
 
 export default {
   articleAction,
-  loginAction
+  loginAction,
+  menuAction,
+  livingroomAction,
 }

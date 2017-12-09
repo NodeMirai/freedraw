@@ -29,11 +29,13 @@ $header-wrap-bg-color: $white;
         text-align: center;
     }
     .search-form {
-        display: inline-block;
         background: lightblue;
         padding: 5px;
         border-radius: 3px;
         margin-left: 8rem;
+        position: absolute;
+        top: 2.5rem;
+        right: 40rem;
         input {
             border: none;
             background: transparent;

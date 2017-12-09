@@ -37,6 +37,11 @@ class Article extends React.Component {
     })
   }
 
+  componentWillUnmount() {
+    let selectArticle = this.props.selectArticle
+    selectArticle('')
+  }
+
   addArticle() {
     let { getArticle } = this.props
     let article = {
@@ -98,18 +103,13 @@ class Article extends React.Component {
   }
 
   render() {
-    let { currentId, articleList, selectArticle } = this.props
+    let { currentId, articleList, } = this.props
     let currentArticle = {}, toolbar = []
 
-    if (articleList.length > 0) {
-      if (!currentId) {
-        currentArticle = articleList[0]
-        currentId = currentArticle._id
-      } else {
-        currentArticle = articleList.find(val => val._id === currentId)
-      }
-      this.refs.title.value = currentArticle.title
-      this.refs.article.value = currentArticle.content
+    /**
+     * 待优化，思考是否可以只在每次初始化时
+     */
+    if (currentId) {
       toolbar = [
         {
           text: '保存',
