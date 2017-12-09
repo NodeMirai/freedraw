@@ -56,26 +56,7 @@ $header-wrap-bg-color: $white;
     }
 }
 
-.nav-top {
-    height: 100%;
-    line-height: 4rem;
-    font-size: 16px;
-    padding-left: 6rem;
-    display: inline-block;
-    ul>li {
-        display: inline;
-        padding: 1rem 2rem;
-        &:hover {
-            background-color: #ccc;
-            color: #fff;
-            cursor: pointer;
-        }
-    }
-}
-
-
 /* 登陆后 */
-
 .user {
     position: absolute;
     top: 0;

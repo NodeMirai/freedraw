@@ -1,0 +1,15 @@
+.nav-top {
+    line-height: 4rem;
+    font-size: 16px;
+    padding-left: 6rem;
+    margin-top: 8rem;
+    ul>li {
+        display: inline;
+        padding: 1rem 2rem;
+        &:hover {
+            background-color: #ccc;
+            color: #fff;
+            cursor: pointer;
+        }
+    }
+}

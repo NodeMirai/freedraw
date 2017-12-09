@@ -1,7 +1,9 @@
 import React from 'react'
 
-import Header from '../../components/header/header'
-import Content from '../../components/content/content'
+import Header from '../../component/header/header'
+import Content from '../../component/content/content'
+import Navbar from '../../component/navbar/navbar'
+
 import * as highlevel from '../../share/highlevel/container/container'
 
 import './usercenter.scss'
@@ -11,6 +13,7 @@ function UserCenter() {
   return (
     <div>
       <Header title={title} />
+      <Navbar />
       {/* <Containter /> */}
       { highlevel.highContainer(<Content />) }
     </div>

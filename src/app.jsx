@@ -5,8 +5,9 @@ import { bindActionCreators, createStore, applyMiddleware } from 'redux'
 import { connect, Provider } from 'react-redux'
 import thunkMiddleware from 'redux-thunk'
 
-import Header from './components/header/header'
-import Footer from './components/footer/footer'
+import Header from './component/header/header'
+import Footer from './component/footer/footer'
+import Navbar from './component/navbar/navbar'
 import Layout from './share/component/layout/layout'
 import Menu from './share/component/menu/menu'
 
@@ -50,6 +51,7 @@ class Home extends React.Component {
     return (
       <div className="app">
         <Header title={title} />
+        <Navbar />
         { highlevel.highContainer() }
         <Footer />
         <Layout />
