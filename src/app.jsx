@@ -17,7 +17,7 @@ import Login from './page/login/login'
 import UserCenter from './page/usercenter/usercenter'
 
 import * as highlevel from './share/highlevel/container/container'
-
+import Modal from './share/highlevel/modal/modal'
 /**
  * 获取所有action与reducer
  */
@@ -25,7 +25,6 @@ import rootReducer from './redux/reducer'
 import * as actionCreators from './redux/action'
 
 import './app.scss'
-
 /**
  * 1. 添加thunk中间件，时action内部可以实现多次异步dispatch(例如新增与删除后再更新文章列表)
  * 2. 通过createStore将reducer中的state合并为一个单独的state对象存储在store中，可通过store.getState()获取
@@ -50,6 +49,9 @@ class Home extends React.Component {
 
   render() {
     const { title } = this.state
+    let Hehe = Modal({
+      headerText: '个人资料'
+    })
     return (
       <div className="app">
         <Header title={title} />
@@ -58,6 +60,7 @@ class Home extends React.Component {
         <Footer />
         <Layout />
         <Menu items={this.state.menuItem} />
+        <Hehe />
       </div>
     )
   }
