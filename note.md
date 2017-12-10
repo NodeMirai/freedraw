@@ -132,3 +132,7 @@ Storage其他用法：
 1. 直接import对应的所有action creator，组件出发action creator后会进入reducer匹配环节来修改state
 2. 不引入所有action creator，通过(dispatch) => {...}的方式可以直接定义需要dispatch的action
 __注：这里需要看connect第二个参数的使用情况，猜测：如果直接返回state则直接render，如果为action creator则需要通过reducer返回state后render__
+
+## 2017-12-11
+### 用户信息修改保存接口与前端界面
+### 调整模态框位置
