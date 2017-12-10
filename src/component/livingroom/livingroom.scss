@@ -1,0 +1,31 @@
+.livingroom {
+    padding: 1rem 2rem;
+    h2 {
+        border-left: 4px solid #ff2853;
+        padding: 1rem 2rem;
+    }
+    p {
+        max-height: 6rem;
+        word-wrap: break-word;
+        word-break: break-all;
+        text-overflow: ellipsis;
+    }
+    @extend %article-list
+}
+
+%article-list {
+    li {
+        width: 50%;
+        border-bottom: 1px solid #eee;
+        padding: 1rem 0;
+        img {
+            width: 4rem;
+            height: 4rem;
+            border-radius: 50%;
+            vertical-align: middle;
+        }
+        strong, time {
+            margin-left: 1rem;
+        }
+    }
+}

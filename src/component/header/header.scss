@@ -14,7 +14,7 @@ $header-wrap-bg-color: $white;
     top: 0;
     z-index: $z-index-user--menu--avatar;
     width: 100%;
-    padding: 0 5%;
+    padding: 0 10%;   // 整体padding需要单独抽出变为全局变量
     border-bottom: 1px solid #ccc;
     box-sizing: border-box;
     background: $header-wrap-bg-color;
