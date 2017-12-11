@@ -11,6 +11,7 @@ import Navbar from './component/navbar/navbar'
 import Layout from './share/component/layout/layout'
 import Menu from './share/component/menu/menu'
 
+import UserInfo from './component/userinfo/userinfo'
 import LivingRoom from './component/livingroom/livingroom'
 
 import Login from './page/login/login'
@@ -50,7 +51,8 @@ class Home extends React.Component {
   render() {
     const { title } = this.state
     let Hehe = Modal({
-      headerText: '个人资料'
+      headerText: '个人资料',
+      modalBody: <UserInfo />,
     })
     return (
       <div className="app">

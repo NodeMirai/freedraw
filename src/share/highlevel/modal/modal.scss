@@ -6,8 +6,6 @@ $modal__close-squre: 1rem;
     top: 10%;
     left: 50%;
     transform: translate(-50%);
-    width: 20rem;
-    height: 20rem;
     box-shadow: 0 5px 18px rgba(0, 0, 0, 0.4);
     border-radius: 4px;
     background: #fff;
@@ -31,8 +29,5 @@ $modal__close-squre: 1rem;
                 cursor: pointer;
             }
         }
-    }
-    .modal__body {
-        height: 15rem;
     }
 }

@@ -1,0 +1,68 @@
+.userinfo {
+    display: grid;
+    width: 400px;
+    height: 300px;
+    padding: 3rem;
+    grid-template-columns: 50px 50px 50px 50px 50px 50px 50px 50px;
+    grid-template-rows: 50px 50px 30px 30px 30px 30px;
+    grid-row-gap: 1rem;
+    .userinfo__avatar, .userinfo__nickname, .userinfo__sex, .userinfo__birthday, .userinfo__btn {
+        grid-column-start: 1;
+        grid-column-end: 9;
+        display: grid;
+        grid-template-columns: 50px 50px 50px 50px 50px 50px 50px 50px;
+        grid-template-rows: 30px;
+    }
+    .userinfo__avatar {
+        grid-template-rows: 50px 50px;
+        grid-row-start: 1;
+        grid-row-end: 3;
+        label {
+            grid-row-start: 1;
+            grid-row-end: 2;
+        }
+        img {
+            grid-column-start: 2;
+            grid-column-end: 4;
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+        }
+        button {
+            grid-column-start: 5;
+            grid-column-end: 7;
+            height: 25px;
+        }
+        p {
+            grid-column-start: 5;
+            grid-column-end: 9;
+            position: relative;
+            bottom: 25px;
+        }
+    }
+    .userinfo__nickname {
+        input {
+            grid-column-start: 2;
+            grid-column-end: 9;
+            height: 20px;
+        }
+    }
+    .userinfo__birthday {
+        grid-template-columns: 50px 60px 15px 50px 15px 50px 50px 40px;
+        select {
+            height: 20px;
+        }
+    }
+    .userinfo__btn {
+        .userinfo__btn__save {
+            grid-column-start: 2;
+            grid-column-end: 5;
+            background: rgb(14, 133, 220);
+            color: #fff;
+        }
+        .userinfo__btn__concel {
+            grid-column-start: 5;
+            grid-column-end: 7;
+        }
+    }
+}

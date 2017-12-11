@@ -29,7 +29,7 @@ export default function(modalOpt) {
                 <span className="modal__head__text">{modalOpt.headerText}</span>
               </div>
               <div className="modal__body">
-                {}
+                { modalOpt.modalBody }
               </div>
             </div>
           )
