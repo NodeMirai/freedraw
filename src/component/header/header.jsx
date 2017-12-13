@@ -1,7 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
-// import * as MenuAction from '../../redux/action/menu'
 import indexAction from '../../redux/action/index'
 
 import './header.scss'
@@ -20,7 +19,7 @@ function Header(props) {
   let user = token ? (
     // 个人头像加下拉列表：消息，收藏，个人中心，退出登陆
     <div className="user">
-      <img className="user--avatar" src={avatar} onMouseEnter={showMenu.bind(null, true)} />
+      <img className="user--avatar" src={avatar} onClick={() => modalToggle(true)} onMouseEnter={() => showMenu(true)} />
       <a className="user-signout" onClick={() => signout()} href="#">退出登陆</a>
     </div>
 
@@ -40,7 +39,6 @@ function Header(props) {
         </h1>
         <i>如果一次也不回头 我能走到哪里</i>
       </div>
-      <button onClick={() => modalToggle(true)} >modal</button>
       <form className="search-form">
         <input type="input" autoComplete="on" placeholder="搜索..." />
         <i className="fa fa-search"></i>
@@ -56,6 +54,9 @@ Header = connect(
   (dispatch) => ({
     showModalToggle(isModalShow) {
       dispatch(indexAction.modalAction.modalToggle(isModalShow))
+    },
+    showMenu(isMenuShow) {
+      dispatch(indexAction.menuAction.showMenu(isMenuShow))
     }
   }),
 )(Header)
