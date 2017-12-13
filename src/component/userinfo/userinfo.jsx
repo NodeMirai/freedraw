@@ -8,9 +8,13 @@ class UserInfo extends React.Component {
     super(props)
   }
 
+  componentWillMount() {
+
+  }
+
   render() {
     return (
-      <div className="userinfo">
+      <form className="userinfo">
         <section className="userinfo__avatar">
           <label>头像</label>
           <img src="https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=1870247392,1316906891&fm=27&gp=0.jpg" alt="" />
@@ -23,7 +27,7 @@ class UserInfo extends React.Component {
         </section>
         <section className="userinfo__sex">
           <label>性别</label>
-          <span><input type="radio" name="sex" value="1" />男</span>
+          <span><input type="radio" name="sex" value="1" defaultChecked/>男</span>
           <span><input type="radio" name="sex" value="0" />女</span>
         </section>
         <section className="userinfo__birthday">
@@ -45,7 +49,7 @@ class UserInfo extends React.Component {
           <button className="userinfo__btn__save">保存</button>
           <button className="userinfo__btn__concel">取消</button>
         </section>
-      </div>
+      </form>
     )
   }
 }

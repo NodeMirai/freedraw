@@ -18,10 +18,13 @@ class Login extends React.Component {
     let type = parseInt(props.match.params.type, 10)
     let changeType = props.changeType
     changeType(type)
+    this.state = {
+      errMessage: ''
+    }
   }
 
   changeTab() {
-    let { type, changeType} = this.props
+    let { type, changeType } = this.props
     if (type === 2) {
       changeType(1)
     } else {
@@ -39,18 +42,24 @@ class Login extends React.Component {
   register() {
     let username = this.refs.registerUsername.value
     let password = this.refs.registerPassword.value
-    let { register } = this.props
-    loginService.register(username, password)
-      .then(data => {
-        alert(data.message)
-        this.refs.loginUsername.value = ''
-        this.refs.password.value = ''
-        // 跳转至首页
-        window.location.href = '/'
-      })
-      .catch(() => {
-        console.error(err)
-      })
+    let { register, isUsernameRepeat } = this.props
+
+    if (isUsernameRepeat) {
+      // 用户名重复，不可注册
+    } else {
+      loginService.register(username, password)
+        .then(data => {
+          alert(data.message)
+          this.refs.loginUsername.value = ''
+          this.refs.password.value = ''
+          // 跳转至首页
+          window.location.href = '/'
+        })
+        .catch((err) => {
+          console.error(err)
+        })
+    }
+
   }
 
   login() {
@@ -68,13 +77,21 @@ class Login extends React.Component {
         sessionStorage.setItem('avatar', "https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=1870247392,1316906891&fm=27&gp=0.jpg")
         location.href = '/'
         // 存储用户信息至sessionStorage中，例如用户头像
-
+        this.setState = {
+          errMessage: ''
+        }
       })
-      .catch(err => console.error(err))
+      .catch(err => {
+        console.log(err)
+        this.setState({
+          errMessage: err.message
+        })
+      })
   }
 
   render() {
     let { type, isUsernameRepeat } = this.props
+    let errMessage = this.state.errMessage
 
     let tabContent = type === 2 ?
       (
@@ -102,6 +119,9 @@ class Login extends React.Component {
           <div className="password">
             <input type="password" ref="loginPassword" placeholder="密码" />
           </div>
+          {
+            errMessage && <p style={{ color: 'rgb(255, 0, 0)' }}>{errMessage}</p>
+          }
           <button onClick={() => this.login()}>登陆</button>
         </div>
       )

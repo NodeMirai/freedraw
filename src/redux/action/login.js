@@ -7,7 +7,7 @@ export const CHANGE_TYPE = 'CHANGE_TYPE'
 
 export function checkUsername(username) {
   return dispatch => loginService.checkname(username)
-           .then(() => dispatch({ type: CHECK_USERNAME, isUsernameRepeat: true })).catch(() => dispatch({ type: CHECK_USERNAME, isUsernameRepeat: true }))
+           .then(() => dispatch({ type: CHECK_USERNAME, isUsernameRepeat: false })).catch(() => dispatch({ type: CHECK_USERNAME, isUsernameRepeat: true }))
 }
 
 export function changeType(formType) {

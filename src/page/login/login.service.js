@@ -42,7 +42,7 @@ export function login(username, password) {
         if (data.status === 200) {
           resolve(data)
         } else {
-          reject('报错')
+          reject(data)
         }
       })
       .catch(err => console.error(err))
