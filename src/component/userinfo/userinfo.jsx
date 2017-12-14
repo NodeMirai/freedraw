@@ -74,7 +74,7 @@ class UserInfo extends React.Component {
 
   updateInfo() {
     let { nickname, sex, year, month, day, img } = this.state
-    fetchAPI('/api/user', {method: 'PUT', data: {nickname, sex, birthday: new Date(year, month, day), img}}, (data) => {
+    fetchAPI('/api/user', { method: 'PUT', data: { nickname, sex, birthday: new Date(year, month, day), img } }, (data) => {
       if (data.status === 200) {
         console.log(data)
       }
@@ -85,15 +85,32 @@ class UserInfo extends React.Component {
     let img = this.refs.avatarImg
     let file = this.refs.file.files[0]
 
+    let viewloader = new FileReader()
     let fileloader = new FileReader()
-    fileloader.onloadend = () => {
-      if (fileloader.readyState === fileloader.DONE) {
+    viewloader.onloadend = () => {
+      if (viewloader.readyState === fileloader.DONE) {
         this.setState({
-          img: fileloader.result,
+          img: viewloader.result,
         })
       }
     }
-    fileloader.readAsDataURL(file)
+
+    // 文件上传
+    console.log(file)
+    var fd = new FormData();
+    fd.append('file', file);
+    var ext = file.name.substring(file.name.lastIndexOf('.'));
+    fd.append('extention', ext);
+    fd.append('maxsize', 1024 * 1024 * 4);// 默认一次上传最大4MB
+    fd.append('isClip', -1);
+    console.log(fd.get('file'))
+    fetch('/api/upload', { method: 'POST', headers: { Authorization: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbiI6IjExMSIsImlhdCI6MTUxMzIzODAyMSwiZXhwIjoxNTEzMzI0NDIxfQ.WP_r-hwV7-zJrDxe2kjvEaWkwTLY4KoXDlU8iBfZ4zg', }, body: fd })
+      .then(result => console.log(result))
+    /* fetchAPI('/api/upload', { method: 'POST', data: fd }, (result) => {
+
+    }) */
+
+    viewloader.readAsDataURL(file)
   }
 
   render() {
@@ -103,8 +120,8 @@ class UserInfo extends React.Component {
       <form className="userinfo">
         <section className="userinfo__avatar">
           <label>头像</label>
-          <img src={img} alt="头像" ref="avatarImg"/>
-          <input type="file" ref="file" readOnly onChange={ this.viewAvatar.bind(this) } />
+          <img src={img} alt="头像" ref="avatarImg" />
+          <input type="file" ref="file" readOnly onChange={this.viewAvatar.bind(this)} />
           <p>支持JPG, BMP, PNG格式，最大不超过1M</p>
         </section>
         <section className="userinfo__nickname">
