@@ -28,9 +28,9 @@
             height: 100px;
             border-radius: 50%;
         }
-        button {
+        input[type="file"] {
             grid-column-start: 5;
-            grid-column-end: 7;
+            grid-column-end: 9;
             height: 25px;
         }
         p {

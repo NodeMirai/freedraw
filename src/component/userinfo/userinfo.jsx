@@ -21,11 +21,11 @@ class UserInfo extends React.Component {
     super(props)
     this.state = {
       nickname: '',
+      img: '',
+      year: 1990,
+      month: 6,
+      day: 1,
       sex: '1',
-      year: '1990',
-      month: '6',
-      day: '1',
-      img: 'https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=1870247392,1316906891&fm=27&gp=0.jpg',
     }
   }
 
@@ -35,12 +35,12 @@ class UserInfo extends React.Component {
       if (result.status === 200) {
         let birthday = new Date(result.data.birthday)
         this.setState({
-          nickname: result.data.nickname,
-          img: result.data.img,
+          nickname: result.data.nickname || '',
+          img: result.data.img || '',
           year: birthday.getFullYear(),
           month: birthday.getMonth() + 1,
           day: birthday.getDate(),
-          sex: result.data.sex + '',
+          sex: (result.data.sex || '') + '',
         })
       }
     })
@@ -81,6 +81,21 @@ class UserInfo extends React.Component {
     })
   }
 
+  viewAvatar() {
+    let img = this.refs.avatarImg
+    let file = this.refs.file.files[0]
+
+    let fileloader = new FileReader()
+    fileloader.onloadend = () => {
+      if (fileloader.readyState === fileloader.DONE) {
+        this.setState({
+          img: fileloader.result,
+        })
+      }
+    }
+    fileloader.readAsDataURL(file)
+  }
+
   render() {
     let { nickname, sex, year, month, day, img } = this.state
     let showModalToggle = this.props.showModalToggle
@@ -88,8 +103,8 @@ class UserInfo extends React.Component {
       <form className="userinfo">
         <section className="userinfo__avatar">
           <label>头像</label>
-          <img src={img} alt="头像" />
-          <button>上传新头像</button>
+          <img src={img} alt="头像" ref="avatarImg"/>
+          <input type="file" ref="file" readOnly onChange={ this.viewAvatar.bind(this) } />
           <p>支持JPG, BMP, PNG格式，最大不超过1M</p>
         </section>
         <section className="userinfo__nickname">
