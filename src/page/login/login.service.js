@@ -35,7 +35,6 @@ export function login(username, password) {
       })
     })
       .then(res => {
-        console.log(res)
         return res.json()
       })
       .then(data => {

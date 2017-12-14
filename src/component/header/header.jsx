@@ -48,7 +48,6 @@ function Header(props) {
     </header>
   )
 }
-console.log(indexAction)
 Header = connect(
   (state) => state,
   (dispatch) => ({
