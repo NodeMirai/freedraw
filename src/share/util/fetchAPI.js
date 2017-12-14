@@ -23,8 +23,10 @@ export default (url, options, callback ) => {
 
   // 仅当数据存在时赋值，不存在则不尽兴添加
   options.data && (init.body = JSON.stringify(options.data))
-
+  // 自定义content-type
   options['Content-type'] && (init.headers['Content-type'] = options['Content-type'])
+  // 删除content-type
+  options.noContentType && delete init.headers['Content-type']
 
   fetch(url, init)
     .then(res => res.json())

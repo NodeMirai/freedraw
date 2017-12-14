@@ -40,7 +40,7 @@ class UserInfo extends React.Component {
           year: birthday.getFullYear(),
           month: birthday.getMonth() + 1,
           day: birthday.getDate(),
-          sex: (result.data.sex || '') + '',
+          sex: (result.data.sex || '') + '1',
         })
       }
     })
@@ -74,11 +74,26 @@ class UserInfo extends React.Component {
 
   updateInfo() {
     let { nickname, sex, year, month, day, img } = this.state
+    let file = this.refs.file.files[0]
+
     fetchAPI('/api/user', { method: 'PUT', data: { nickname, sex, birthday: new Date(year, month, day), img } }, (data) => {
       if (data.status === 200) {
         console.log(data)
+
+        // 文件上传
+        console.log(file)
+        var fd = new FormData();
+        fd.append('file', file);
+        var ext = file.name.substring(file.name.lastIndexOf('.'));
+        fd.append('extention', ext);
+        fd.append('maxsize', 1024 * 1024 * 4);// 默认一次上传最大4MB
+        fd.append('isClip', -1);
+        console.log(fd.get('file'))
+        fetch('/api/upload', { method: 'POST', headers: { Authorization: sessionStorage.getItem('token'), }, body: fd })
+          .then(result => console.log(result))
       }
     })
+
   }
 
   viewAvatar() {
@@ -94,21 +109,6 @@ class UserInfo extends React.Component {
         })
       }
     }
-
-    // 文件上传
-    console.log(file)
-    var fd = new FormData();
-    fd.append('file', file);
-    var ext = file.name.substring(file.name.lastIndexOf('.'));
-    fd.append('extention', ext);
-    fd.append('maxsize', 1024 * 1024 * 4);// 默认一次上传最大4MB
-    fd.append('isClip', -1);
-    console.log(fd.get('file'))
-    fetch('/api/upload', { method: 'POST', headers: { Authorization: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbiI6IjExMSIsImlhdCI6MTUxMzIzODAyMSwiZXhwIjoxNTEzMzI0NDIxfQ.WP_r-hwV7-zJrDxe2kjvEaWkwTLY4KoXDlU8iBfZ4zg', }, body: fd })
-      .then(result => console.log(result))
-    /* fetchAPI('/api/upload', { method: 'POST', data: fd }, (result) => {
-
-    }) */
 
     viewloader.readAsDataURL(file)
   }

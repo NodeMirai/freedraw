@@ -159,4 +159,8 @@ input[type=file]中可以从DOM.files中获取选择的Blob对象(二进制数�
 filereader对象通过监听onloadend事件判断blob对象读取状态
 - filereader.readyState为fileReader.DONE时表示读取完成，同时filereader.reasult会返回一个blob的以data:开头的base64
 - 将base64放入img标签的src属性中即可实现
-#### 2. express文件上传原理
+#### 2. formdata文件上传注意事项
+1. __content-type头不要自定义__，此时浏览器会自动添加正确头部,有时候会自动添加content-type:text-plain（不造为啥）
+2. formdata对象可以通过input[type="file"]生成，__也可通过blob或file对象生成__
+
+3. 更新用户信息接口需要将上传与用户信息更新放在一起，否则头像资源路径不方便与其他信息一起存储
