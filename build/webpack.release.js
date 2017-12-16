@@ -16,7 +16,7 @@ const config = {
 
   module: {
     rules: [
-      { test: /\.jsx$/, use: 'babel-loader' },
+      { test: /\.(jsx|js)$/, use: 'babel-loader' },
       {
         test: /\.scss$/,
         use: [

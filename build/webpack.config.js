@@ -19,15 +19,6 @@ const config = {
 
   devtool: 'eval-source-map',
 
-  /* externals: {
-    "react": 'React',
-    "react-dom": "ReactDOM",
-    "react-router": "ReactRouter",
-    'history': "History",
-    'redux': 'Redux',
-    'react-redux': 'ReactRedux'
-  }, */
-
   module: {
     rules: [
       { test: /\.jsx$/, use: 'babel-loader' },
@@ -41,23 +32,6 @@ const config = {
           },
         ],
       },
-      /* {
-        test: /\.(png|jpg)$/,
-        use: 'url-loader?limit=8192&name=images/[hash:8].[name].[ext]'
-      }, */
-      /* {
-        test: /\.(png|jpg|gif)$/,
-        use: [
-          {
-            loader: 'file-loader',
-            options: {
-              name: '[name]-[hash:8].[ext]',
-              publicPath: '/',
-              outputPath: '/build/dev/'
-            }
-          }
-        ]
-      } */
     ],
   },
 
