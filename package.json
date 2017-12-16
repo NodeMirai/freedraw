@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "repository": "https://github.com/NodeMirai/freedraw",
   "scripts": {
     "start:dev": "webpack-dev-server --config ./build/webpack.config.js",
     "watch": "webpack --watch",
