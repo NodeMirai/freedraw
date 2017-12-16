@@ -31,35 +31,7 @@ class LivingRoom extends React.Component {
         author: '小狼',
         img: 'https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=1870247392,1316906891&fm=27&gp=0.jpg',
         time: '1小时前'
-      },{
-        _id: 2,
-        title: '第一条诗句',
-        content: '<p>今天天气真不错呵呵</p>',
-        author: '小狼',
-        img: 'https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=1870247392,1316906891&fm=27&gp=0.jpg',
-        time: '1小时前'
-      },{
-        _id: 3,
-        title: '第一条诗句',
-        content: '<p>今天天气真不错呵呵</p>',
-        author: '小狼',
-        img: 'https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=1870247392,1316906891&fm=27&gp=0.jpg',
-        time: '1小时前'
-      },{
-        _id: 4,
-        title: '第一条诗句',
-        content: '<p>今天天气真不错呵呵</p>',
-        author: '小狼',
-        img: 'https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=1870247392,1316906891&fm=27&gp=0.jpg',
-        time: '1小时前'
-      },{
-        _id: 5,
-        title: '第一条诗句',
-        content: '<p>今天天气真不错呵呵</p>',
-        author: '小狼',
-        img: 'https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=1870247392,1316906891&fm=27&gp=0.jpg',
-        time: '1小时前'
-      }
+      },
     ]
     return (
       <div className="livingroom">

@@ -1,15 +1,15 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-import Simditor from 'simditor'
 import 'style-loader!css-loader!../../../node_modules/simditor/styles/simditor.css'
 import './article.scss'
 
+import Simditor from 'simditor'
 import moment from 'moment'
+
 import config from '../../../config'
 
 import * as articleService from './article.service'
-
 /**
  * 使用connect装饰器直接增强组件
  * 参数同connect中的参数，被注释的组件则为增强组件

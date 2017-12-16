@@ -164,3 +164,8 @@ filereader对象通过监听onloadend事件判断blob对象读取状态
 2. formdata对象可以通过input[type="file"]生成，__也可通过blob或file对象生成__
 
 3. 更新用户信息接口需要将上传与用户信息更新放在一起，否则头像资源路径不方便与其他信息一起存储
+
+## 2017-12-16
+### 问题记录
+1. 线上环境npm安装包不下载dev中的内容
+2. simiditor的包中源码优先判断了AMD加载，导致root为undefined时报错
