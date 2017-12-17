@@ -4,11 +4,12 @@
         border-left: 4px solid #ff2853;
         padding: 1rem 2rem;
     }
-    p {
+    & > p {
         max-height: 6rem;
         word-wrap: break-word;
         word-break: break-all;
         text-overflow: ellipsis;
+        overflow: hidden;
     }
     @extend %article-list
 }

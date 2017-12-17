@@ -82,7 +82,10 @@ class UserInfo extends React.Component {
         fd.append('maxsize', 1024 * 1024 * 4);// 默认一次上传最大4MB
         fd.append('isClip', -1);
         fetch('/api/upload', { method: 'POST', headers: { Authorization: sessionStorage.getItem('token'), }, body: fd })
-          .then(result => console.log(result))
+          .then(result => result.json())
+          .then(result => {
+            sessionStorage.setItem('avatar', result.data)
+          })
       }
     })
 
