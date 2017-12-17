@@ -1,7 +1,7 @@
 
 export function getAllArticle() {
   return new Promise((resolve, reject) => {
-    fetch('/api/article')
+    fetch('/api/index/article')
       .then(data => data.json())
       .then(data => {
         if (data.status === 200)

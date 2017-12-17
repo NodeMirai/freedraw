@@ -1,7 +1,7 @@
 $z-index-user--menu--avatar: 1000;
 $header-height: 7rem;
 
-.user--menu {
+.user__menu {
     &::before {
         content: '';
         display: block;

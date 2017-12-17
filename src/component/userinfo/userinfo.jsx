@@ -40,7 +40,7 @@ class UserInfo extends React.Component {
           year: birthday.getFullYear(),
           month: birthday.getMonth(),
           date: birthday.getDate(),
-          sex: (result.data.sex + '') || '1',
+          sex: result.data.sex ? result.data.sex +'': '1',
         })
       }
     })
