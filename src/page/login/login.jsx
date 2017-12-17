@@ -67,14 +67,14 @@ class Login extends React.Component {
     let password = this.refs.loginPassword.value
 
     loginService.login(username, password)
-      .then(data => {
+      .then(result => {
         /**
          * 登陆成功后将获取的token存在sessionStorage中，用于判断登陆状态
          * 同时跳转至首页
          */
-        let token = data.token
+        let token = result.data.token
         sessionStorage.setItem('token', token)
-        sessionStorage.setItem('avatar', "https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=1870247392,1316906891&fm=27&gp=0.jpg")
+        sessionStorage.setItem('avatar', result.data.userinfo.avatar || "https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=1870247392,1316906891&fm=27&gp=0.jpg")
         location.href = '/'
         // 存储用户信息至sessionStorage中，例如用户头像
         this.setState = {

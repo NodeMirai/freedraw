@@ -50,7 +50,7 @@ class Home extends React.Component {
 
   render() {
     const { title } = this.state
-    let Hehe = Modal({
+    let UserInfoModal = Modal({
       headerText: '个人资料',
       modalBody: <UserInfo />,
     })
@@ -62,7 +62,7 @@ class Home extends React.Component {
         <Footer />
         <Layout />
         <Menu items={this.state.menuItem} />
-        <Hehe />
+        <UserInfoModal />
       </div>
     )
   }

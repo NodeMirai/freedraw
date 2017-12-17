@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 
 import * as livingroomAction from '../../redux/action/livingroom'
 
+import dateUtil from '../../share/util/date'
 import './livingroom.scss'
 
 @connect(
@@ -23,16 +24,6 @@ class LivingRoom extends React.Component {
 
   render() {
     let { articleList } = this.props
-    articleList = [
-      {
-        _id: 1,
-        title: '第一条诗句',
-        content: '<p>今天天气真不错呵呵</p>',
-        author: '小狼',
-        img: 'https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=1870247392,1316906891&fm=27&gp=0.jpg',
-        time: '1小时前'
-      },
-    ]
     return (
       <div className="livingroom">
         {/* 文章列表 */}
@@ -41,12 +32,12 @@ class LivingRoom extends React.Component {
           {
             articleList.map(val => {
               return (
-                <li key={ val._id }>
-                  <img src={val.img} alt="头像"/>
-                  <strong>小狼</strong>
-                  <time>{ val.time }</time>
-                  <h3>{ val.title }</h3>
-                  <p dangerouslySetInnerHTML={{__html: val.content}}></p>
+                <li key={val._id}>
+                  <img src={val.user.avatar} alt="头像" />
+                  <strong>{val.user.nickname}</strong>
+                  <time>{dateUtil.format(new Date(val.datetime))}</time>
+                  <h3>{val.title}</h3>
+                  <p dangerouslySetInnerHTML={{ __html: val.content }}></p>
                 </li>
               )
             })
