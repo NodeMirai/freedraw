@@ -1,15 +1,12 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-import 'style-loader!css-loader!../../../node_modules/simditor/styles/simditor.css'
+import moment from 'moment'
+import config from '../../../config'
+import wangeditor from 'wangeditor'
+import * as articleService from './article.service'
 import './article.scss'
 
-import Simditor from 'simditor'
-import moment from 'moment'
-
-import config from '../../../config'
-
-import * as articleService from './article.service'
 /**
  * 使用connect装饰器直接增强组件
  * 参数同connect中的参数，被注释的组件则为增强组件
@@ -29,9 +26,8 @@ class Article extends React.Component {
   }
 
   componentDidMount() {
-    let editor = new Simditor({
-      textarea: this.refs.article
-    })
+    let editor = new wangeditor(this.refs.article)
+    editor.create()
     this.setState({
       editor
     })
@@ -160,9 +156,12 @@ class Article extends React.Component {
               })
             }
           </ul>
-          <div className="editor">
-            <textarea ref="article" defaultValue="" ></textarea>
+          <div className="editor" ref="article">
+            <p></p>
           </div>
+          {/* <div className="editor">
+            <textarea ref="article" defaultValue="" ></textarea>
+          </div> */}
         </form>
 
       </section>
