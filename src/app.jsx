@@ -16,6 +16,7 @@ import LivingRoom from './component/livingroom/livingroom'
 
 import Login from './page/login/login'
 import UserCenter from './page/usercenter/usercenter'
+import ArticleContent from './page/articlecontent/articlecontent'
 
 import * as highlevel from './share/highlevel/container/container'
 import Modal from './share/highlevel/modal/modal'
@@ -88,6 +89,7 @@ ReactDOM.render(
         <Route exact path="/" component={ App } />
         <Route exact path="/login/:type" component={ Login } />
         <Route path="/usercenter" component={ UserCenter } />
+        <Route path="/article/detail/:articleId" component={ ArticleContent } />
       </div>
     </Router>
   </Provider>
