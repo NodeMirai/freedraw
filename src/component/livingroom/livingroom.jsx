@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
+import { Link } from 'react-router-dom'
 import * as livingroomAction from '../../redux/action/livingroom'
 
 import dateUtil from '../../share/util/date'
@@ -36,7 +37,7 @@ class LivingRoom extends React.Component {
                   <img src={val.user.avatar} alt="头像" />
                   <strong>{val.user.nickname}</strong>
                   <time>{dateUtil.format(new Date(val.datetime))}</time>
-                  <h3>{val.title}</h3>
+                  <Link className="article-list__item__title" to={"/article/detail/" + val._id}>{val.title}</Link>
                   <p dangerouslySetInnerHTML={{ __html: val.content }}></p>
                 </li>
               )

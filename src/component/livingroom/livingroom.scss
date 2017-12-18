@@ -1,5 +1,15 @@
 .livingroom {
     padding: 1rem 2rem;
+    .article-list__item__title {
+        display: block;
+        font-size: 2rem;
+        text-decoration: none;
+        color: #000;
+        &:hover {
+            cursor: pointer;
+            text-decoration: underline;
+        }
+    }
     h2 {
         border-left: 4px solid #ff2853;
         padding: 1rem 2rem;
