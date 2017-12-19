@@ -12,7 +12,7 @@ function Menu(props) {
   return (
     <ul className="user__menu" style={{ display: menu.isMenuShow ? 'block' : 'none' }} onMouseEnter={showMenu.bind(null, true)} >
       {
-        items.map(val => <li key={val}><Link to="/usercenter">{ val }</Link></li>)
+        items.map(val => <li key={val}><Link to="/index/usercenter">{ val }</Link></li>)
       }
     </ul>
   )

@@ -37,7 +37,7 @@ class LivingRoom extends React.Component {
                   <img src={val.user.avatar} alt="头像" />
                   <strong>{val.user.nickname}</strong>
                   <time>{dateUtil.format(new Date(val.datetime))}</time>
-                  <Link className="article-list__item__title" to={"/article/detail/" + val._id}>{val.title}</Link>
+                  <Link className="article-list__item__title" to={"/index/article/detail/" + val._id}>{val.title}</Link>
                   <p dangerouslySetInnerHTML={{ __html: val.content }}></p>
                 </li>
               )

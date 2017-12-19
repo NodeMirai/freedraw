@@ -25,9 +25,9 @@ function Header(props) {
 
   ) : (
       <div className="login-btn-group">
-        <Link to="/login/1">登陆</Link>
+        <Link to="/index/login/1">登陆</Link>
         {/* 这里需要路由传值 */}
-        <Link to="/login/2">注册</Link>
+        <Link to="/index/login/2">注册</Link>
       </div>
     )
 

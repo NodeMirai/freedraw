@@ -87,9 +87,9 @@ ReactDOM.render(
     <Router>
       <div>
         <Route exact path="/" component={ App } />
-        <Route exact path="/login/:type" component={ Login } />
-        <Route path="/usercenter" component={ UserCenter } />
-        <Route path="/article/detail/:articleId" component={ ArticleContent } />
+        <Route exact path="/index/login/:type" component={ Login } />
+        <Route path="/index/usercenter" component={ UserCenter } />
+        <Route path="/index/article/detail/:articleId" component={ ArticleContent } />
       </div>
     </Router>
   </Provider>

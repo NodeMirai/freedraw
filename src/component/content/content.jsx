@@ -15,10 +15,10 @@ import './content.scss'
 function Content() {
   return (
     <section className="content">
-      <Route exact path="/usercenter/article" component={Article} />
-      <Route exact path="/usercenter/audio" component={ Video} />
-      <Route exact path="/usercenter/picture" component={Picture} />
-      <Route exact path="/usercenter/video" component={ Video} />
+      <Route exact path="/index/usercenter/article" component={Article} />
+      <Route exact path="/index/usercenter/audio" component={ Video} />
+      <Route exact path="/index/usercenter/picture" component={Picture} />
+      <Route exact path="/index/usercenter/video" component={ Video} />
     </section>
   )
 }
