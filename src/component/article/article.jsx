@@ -26,7 +26,7 @@ class Article extends React.Component {
   }
 
   componentDidMount() {
-    let editor = new wangeditor(this.refs.article)
+    let editor = new wangeditor(this.refs.toolbar, this.refs.article)
     editor.create()
     this.setState({
       editor
@@ -56,12 +56,11 @@ class Article extends React.Component {
     let editor = this.state.editor
     // 清空title与editor
     this.refs.title.value = ''
-    editor.setValue('')
+    editor.txt.clear()
   }
 
   removeArticle(id) {
     let { getArticle, selectArticle } = this.props
-    let editor = this.state.editor
     articleService
       .removeArticle(id)
       .then(() => {
@@ -69,7 +68,6 @@ class Article extends React.Component {
         this.initArticle()
         getArticle()
       })
-
   }
 
   updateArticle(id, title, content) {
@@ -83,7 +81,7 @@ class Article extends React.Component {
     articleService
       .updateArticle(article)
       .then(() => getArticle())
-    editor.setValue(content)
+    editor.txt.html(content)
     this.refs.title.value = title
   }
 
@@ -94,7 +92,7 @@ class Article extends React.Component {
 
     selectArticle(id)
 
-    editor.setValue(article.content)
+    editor.txt.html(article.content)
     this.refs.title.value = article.title
   }
 
@@ -156,12 +154,12 @@ class Article extends React.Component {
               })
             }
           </ul>
+          <div ref="toolbar">
+
+          </div>
           <div className="editor" ref="article">
             <p></p>
           </div>
-          {/* <div className="editor">
-            <textarea ref="article" defaultValue="" ></textarea>
-          </div> */}
         </form>
 
       </section>

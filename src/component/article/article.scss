@@ -1,6 +1,7 @@
 $articleHeight: 100%;
 $articleListWidth: calc(15% - 2px);
 $editorWidth: 85%;
+$editorHeight: calc(100% - 66px);
 $editorTitleHeight: 40px;
 $editorTitleFontSize: 18px;
 
@@ -13,6 +14,7 @@ $borderColor: #ccc;
     .editor-area {
         float: right;
         width: $editorWidth;
+        height: $editorHeight;
         .editor-title {
             display: block;
             width: 100%;
@@ -27,6 +29,7 @@ $borderColor: #ccc;
         }
         .editor {
             border: none;
+            height: $articleHeight;
         }
         .toolbar {
             background: #dedede;
