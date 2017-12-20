@@ -34,11 +34,13 @@ class LivingRoom extends React.Component {
             articleList.map(val => {
               return (
                 <li key={val._id}>
-                  <img src={val.user.avatar} alt="头像" />
-                  <strong>{val.user.nickname}</strong>
-                  <time>{dateUtil.format(new Date(val.datetime))}</time>
+                  <div className="author-info">
+                    <img src={val.user.avatar} alt="头像" />
+                    <strong className="author__nickname">{val.user.nickname}</strong>
+                    <time>{dateUtil.format(new Date(val.datetime))}</time>
+                  </div>
                   <Link className="article-list__item__title" to={"/index/article/detail/" + val._id}>{val.title}</Link>
-                  <p dangerouslySetInnerHTML={{ __html: val.content }}></p>
+                  <p dangerouslySetInnerHTML={{ __html: val.digest }}></p>
                 </li>
               )
             })

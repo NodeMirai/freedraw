@@ -74,7 +74,7 @@ class Login extends React.Component {
          */
         let token = result.data.token
         sessionStorage.setItem('token', token)
-        sessionStorage.setItem('avatar', result.data.userinfo.avatar || "https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=1870247392,1316906891&fm=27&gp=0.jpg")
+        sessionStorage.setItem('avatar', ("/" + result.data.userinfo.avatar) || "https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=1870247392,1316906891&fm=27&gp=0.jpg")
         location.href = '/'
         // 存储用户信息至sessionStorage中，例如用户头像
         this.setState = {

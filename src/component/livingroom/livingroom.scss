@@ -1,7 +1,8 @@
+$avatar__length: 3rem;
+
 .livingroom {
     padding: 1rem 2rem;
     .article-list__item__title {
-        display: block;
         font-size: 2rem;
         text-decoration: none;
         color: #000;
@@ -30,13 +31,27 @@
         border-bottom: 1px solid #eee;
         padding: 1rem 0;
         img {
-            width: 4rem;
-            height: 4rem;
+            width: $avatar__length;
+            height: $avatar__length;
             border-radius: 50%;
             vertical-align: middle;
         }
         strong, time {
             margin-left: 1rem;
         }
+    }
+}
+
+.author-info {
+    position: relative;
+    .author__nickname, time {
+        position: absolute;
+        left: 3rem;
+    }
+    .author__nickname {
+        top: 0;
+    }
+    time {
+        bottom: 0;
     }
 }

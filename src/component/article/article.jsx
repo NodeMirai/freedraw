@@ -70,13 +70,16 @@ class Article extends React.Component {
       })
   }
 
-  updateArticle(id, title, content) {
+  updateArticle(id) {
     let { getArticle } = this.props
     let editor = this.state.editor
+    let contentText = editor.txt.text()
     let article = {
       id: id,
-      title, title,
-      content: content,
+      title: this.refs.title.value,
+      content: editor.txt.html(),
+      digest: contentText.slice(0, 100),
+      words: contentText.length,
     }
     articleService
       .updateArticle(article)
@@ -108,7 +111,7 @@ class Article extends React.Component {
         {
           text: '保存',
           onclick: (id) => {
-            this.updateArticle(id, this.refs.title.value, this.refs.article.value)
+            this.updateArticle(id)
           }
         }, {
           text: '删除',

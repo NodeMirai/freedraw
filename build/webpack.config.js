@@ -1,6 +1,5 @@
 const path = require('path')
 const htmlWebpackPlugin = require('html-webpack-plugin')
-var CopyWebpackPlugin = require('copy-webpack-plugin');
 
 const config = {
 
@@ -37,6 +36,7 @@ const config = {
 
   devServer: {
     contentBase: '/',
+    publicPath: '/',
   },
 
   plugins: [
@@ -44,10 +44,6 @@ const config = {
       title: '万事不顺屋',
       template: '../build/dev/index.html'
     }),
-    new CopyWebpackPlugin([{
-      from: '../src/assets/',
-      to: __dirname + '/dev/'
-  }])
   ],
 }
 

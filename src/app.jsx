@@ -84,7 +84,7 @@ document.body.appendChild(app)
 
 ReactDOM.render(
   <Provider store={ store }>
-    <Router>
+    <Router basename="/">
       <div>
         <Route exact path="/" component={ App } />
         <Route exact path="/index/login/:type" component={ Login } />
