@@ -1,5 +1,5 @@
 const path = require('path')
-
+var CopyWebpackPlugin = require('copy-webpack-plugin');
 const config = {
 
   context: path.resolve(__dirname),
@@ -36,6 +36,10 @@ const config = {
   },
 
   plugins: [
+    new CopyWebpackPlugin([{
+      from: '../src/assets/',
+      to: __dirname + '/dist/'
+    }])
   ],
 }
 
