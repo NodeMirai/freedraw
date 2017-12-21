@@ -84,8 +84,6 @@ class Article extends React.Component {
     articleService
       .updateArticle(article)
       .then(() => getArticle())
-    editor.txt.html(content)
-    this.refs.title.value = title
   }
 
   clickArticle(id) {

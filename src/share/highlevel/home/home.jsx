@@ -12,7 +12,7 @@ import Menu from '../../component/menu/menu'
 import Modal from '../modal/modal'
 
 // !这个组件应该封装在component或者container中
-function highHome({ title, menuItem, CustomModal, container }) {
+function highHome({ title, menuItem, UserInfoModal, container }) {
   return function Home() {
     return (
       <div className="app">
@@ -22,7 +22,7 @@ function highHome({ title, menuItem, CustomModal, container }) {
         <Footer />
         <Layout />
         <Menu items={menuItem} />
-        <CustomModal />
+        <UserInfoModal />
       </div>
     )
   }

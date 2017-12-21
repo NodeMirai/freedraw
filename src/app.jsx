@@ -5,30 +5,13 @@ import { bindActionCreators, createStore, applyMiddleware } from 'redux'
 import { connect, Provider } from 'react-redux'
 import thunkMiddleware from 'redux-thunk'
 
-import Modal from './share/highlevel/modal/modal'
-import highContainer from './share/highlevel/container/container'
-import LivingRoom from './component/livingroom/livingroom'
-import UserInfo from './component/userinfo/userinfo'
-
 import Login from './page/login/login'
 import UserCenter from './page/usercenter/usercenter'
 import ArticleContent from './page/articlecontent/articlecontent'
 
 import highHome from './share/highlevel/home/home'
-let data = {
-  title: '万事不顺屋',
-  menuItem: [
-    '个人中心',
-    '收藏',
-    '消息',
-  ],
-  CustomModal: Modal({
-    headerText: '个人资料',
-    modalBody: <UserInfo />,
-  }),
-  container: highContainer(<LivingRoom />)
-}
-const Home = highHome(data)
+
+import HomeModal from './modal/homemodal'
 /**
  * 获取所有action与reducer
  */
@@ -47,6 +30,8 @@ const store = applyMiddleware(
 /**
  * 增强App组件，通过connect方法可使组件得到获取store与actions的能力
  */
+const Home = highHome(HomeModal.app)
+console.log(HomeModal.app)
 const App = connect(
   state => ({ state }),
   dispatch => ({
