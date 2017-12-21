@@ -6,7 +6,7 @@
 import React from 'react'
 import './container.scss'
 
-export function highContainer(child) {
+function highContainer(child) {
   return (function Container() {
     return (
       <main>
@@ -15,3 +15,5 @@ export function highContainer(child) {
     )
   })()
 }
+
+export default highContainer

@@ -174,3 +174,8 @@ filereader对象通过监听onloadend事件判断blob对象读取状态
 ### 文章阅读页
 1. 标题使用a标签替换
 2. 点击后跳转到文章详情组件，同时调用接口获取文章内容数据
+
+## 2017-12-21
+### 首页通用部分封装组件
+1. 公共包含部分：header，menu，userInfo，footer，layout，navbar
+2. 内部所需参数：menu需菜单列表，container内部组件动态传入，header中title

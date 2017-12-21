@@ -5,21 +5,30 @@ import { bindActionCreators, createStore, applyMiddleware } from 'redux'
 import { connect, Provider } from 'react-redux'
 import thunkMiddleware from 'redux-thunk'
 
-import Header from './component/header/header'
-import Footer from './component/footer/footer'
-import Navbar from './component/navbar/navbar'
-import Layout from './share/component/layout/layout'
-import Menu from './share/component/menu/menu'
-
-import UserInfo from './component/userinfo/userinfo'
+import Modal from './share/highlevel/modal/modal'
+import highContainer from './share/highlevel/container/container'
 import LivingRoom from './component/livingroom/livingroom'
+import UserInfo from './component/userinfo/userinfo'
 
 import Login from './page/login/login'
 import UserCenter from './page/usercenter/usercenter'
 import ArticleContent from './page/articlecontent/articlecontent'
 
-import * as highlevel from './share/highlevel/container/container'
-import Modal from './share/highlevel/modal/modal'
+import highHome from './share/highlevel/home/home'
+let data = {
+  title: '万事不顺屋',
+  menuItem: [
+    '个人中心',
+    '收藏',
+    '消息',
+  ],
+  CustomModal: Modal({
+    headerText: '个人资料',
+    modalBody: <UserInfo />,
+  }),
+  container: highContainer(<LivingRoom />)
+}
+const Home = highHome(data)
 /**
  * 获取所有action与reducer
  */
@@ -34,40 +43,6 @@ import './app.scss'
 const store = applyMiddleware(
   thunkMiddleware
 )(createStore)(rootReducer)
-
-// !这个组件应该封装在component或者container中
-class Home extends React.Component {
-  constructor() {
-    super()
-    this.state = {
-      title: '万事不顺屋',
-      menuItem: [
-        '个人中心',
-        '收藏',
-        '消息'
-      ]
-    }
-  }
-
-  render() {
-    const { title } = this.state
-    let UserInfoModal = Modal({
-      headerText: '个人资料',
-      modalBody: <UserInfo />,
-    })
-    return (
-      <div className="app">
-        <Header title={title} />
-        <Navbar />
-        { highlevel.highContainer(<LivingRoom />) }
-        <Footer />
-        <Layout />
-        <Menu items={this.state.menuItem} />
-        <UserInfoModal />
-      </div>
-    )
-  }
-}
 
 /**
  * 增强App组件，通过connect方法可使组件得到获取store与actions的能力
