@@ -179,3 +179,5 @@ filereader对象通过监听onloadend事件判断blob对象读取状态
 ### 首页通用部分封装组件
 1. 公共包含部分：header，menu，userInfo，footer，layout，navbar
 2. 内部所需参数：menu需菜单列表，container内部组件动态传入，header中title
+3. 添加homeModal数据模型，用来配置高阶组件生成组件
+4. 添加homeModal模型基类，设定公共部分，以后出现分歧时创建子类来继承重写

@@ -31,7 +31,6 @@ const store = applyMiddleware(
  * 增强App组件，通过connect方法可使组件得到获取store与actions的能力
  */
 const Home = highHome(HomeModal.app)
-console.log(HomeModal.app)
 const App = connect(
   state => ({ state }),
   dispatch => ({

@@ -32,16 +32,6 @@ class HomeBaseModal {
 
 }
 
-// modal需要提供一个公共父类，子类通过继承方式保存公共部分
-/* {
-  title,
-  menuItem,
-  UserInfoModal: Modal({
-    headerText: '个人资料',
-    modalBody: <UserInfo />,
-  }),
-  container: highContainer(<LivingRoom />)
-} */
 const HomeModal = {
   app: new HomeBaseModal({
     UserInfoModal: Modal({
