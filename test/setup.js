@@ -1,7 +1,3 @@
-import { configure } from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
-configure({ adapter: new Adapter() });
-
 import jsdom from 'jsdom'
 const { JSDOM } = jsdom;
 

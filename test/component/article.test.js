@@ -1,8 +1,10 @@
 import React from 'react'
-import { shallow, renderer, mount } from 'enzyme'
+import { shallow, renderer, mount, configure } from 'enzyme'
 import { expect } from 'chai'
+import Adapter from 'enzyme-adapter-react-16';
+import Chat from '../../src/component/chat/chat.jsx'
 
-import Chat from '../../src/component/chat/chat'
+configure({ adapter: new Adapter() });
 
 describe('test', () => {
 
