@@ -8,7 +8,7 @@
     "start:dev": "webpack-dev-server --config ./build/webpack.config.js",
     "watch": "webpack --watch",
     "dist": "webpack --progress -p --profile --colors --config ./build/webpack.release.js",
-    "test": "mocha --recursive --compilers js:babel-core/register --require ./test/setup.js"
+    "test": "mocha --recursive --compilers js:babel-core/register --require ./test/setup.js --require ignore-styles"
   },
   "keywords": [],
   "author": "",
@@ -46,6 +46,7 @@
     "eslint-plugin-jsx-a11y": "^6.0.2",
     "eslint-plugin-react": "^7.4.0",
     "html-webpack-plugin": "^2.30.1",
+    "ignore-styles": "^5.0.1",
     "jsdom": "^11.5.1",
     "mocha": "^4.0.1",
     "node-sass": "^4.5.3",

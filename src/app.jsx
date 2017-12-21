@@ -19,6 +19,7 @@ import rootReducer from './redux/reducer'
 import * as actionCreators from './redux/action'
 
 import './app.scss'
+
 /**
  * 1. 添加thunk中间件，时action内部可以实现多次异步dispatch(例如新增与删除后再更新文章列表)
  * 2. 通过createStore将reducer中的state合并为一个单独的state对象存储在store中，可通过store.getState()获取

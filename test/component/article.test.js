@@ -5,15 +5,11 @@ import { expect } from 'chai'
 import Chat from '../../src/component/chat/chat'
 
 describe('test', () => {
+
   it('hehe', () => {
-
-    try {
-      let article = shallow(<Chat />)
-      expect(article.find('.chat').text()).to.equal('hehe')
-      done();
-    } catch (e) {
-      console.log(e)
-    }
-
+    let article = shallow(<Chat />)
+    expect(article.find('.chat').text()).to.equal('hehe')
+    done();
   })
+
 })
