@@ -1,7 +1,7 @@
 import React from 'react'
 
 import highHome from '../../share/highlevel/home/home'
-import HomeModal from '../../modal/homemodal'
+import HomeModal from '../../model/homemodel'
 
 import './articlecontent.scss'
 
