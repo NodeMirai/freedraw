@@ -181,3 +181,16 @@ filereader对象通过监听onloadend事件判断blob对象读取状态
 2. 内部所需参数：menu需菜单列表，container内部组件动态传入，header中title
 3. 添加homeModal数据模型，用来配置高阶组件生成组件
 4. 添加homeModal模型基类，设定公共部分，以后出现分歧时创建子类来继承重写
+
+### 错误信息处理
+### react单元测试与集成测试
+1. 测试环境
+- mocha测试框架
+- Enzyme解析react组件
+- chai断言库
+- superagent模拟发送请求
+- jsdom模拟浏览器环境
+2. react测试问题
+- 组件测试分为虚拟dom测试与真实dom测试，当对真实dom测试时需要依赖浏览器dom树环境(window, document, navigator),
+  因此在运行测试文件前需要运行一个前置条件文件setup.js,其中包含了enzyme官方前置与jsdom获取dom环境的过程
+- 断言判断时候使用try catch捕捉异常后会认为测试无问题，只有it中抛出错误才会认为用例失败
