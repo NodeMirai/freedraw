@@ -2,7 +2,7 @@
 // Generated on Thu Dec 21 2017 23:16:39 GMT+0800 (CST)
 var webpackTestConfig = require('./webpack.test.js')
 
-module.exports = function(config) {
+module.exports = function (config) {
   config.set({
 
     // base path that will be used to resolve all patterns (eg. files, exclude)
@@ -11,12 +11,12 @@ module.exports = function(config) {
 
     // frameworks to use
     // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
-    frameworks: ['mocha'],
+    frameworks: ['mocha', 'chai'],
 
 
     // list of files / patterns to load in the browser
     files: [
-      'test/component/article.test.js'
+      'test/**/*.js'
     ],
 
 
@@ -29,14 +29,27 @@ module.exports = function(config) {
     // preprocess matching files before serving them to the browser
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
     preprocessors: {
-      'test/component/article.test.js': [ 'webpack', 'sourcemap' ]
+      'test/**/*.js': ['coverage', 'webpack', 'sourcemap']
     },
 
+    coverageReporter: {
+      reporters: [
+        {
+          type: 'text-summary'
+        }
+      ],
+      instrumenters: {
+        isparta: require('isparta')
+      },
+      instrumenter: {
+        '**/*.js': 'isparta'
+      }
+    },
 
     // test results reporter to use
     // possible values: 'dots', 'progress'
     // available reporters: https://npmjs.org/browse/keyword/karma-reporter
-    reporters: ['progress'],
+    reporters: ['progress', 'coverage'],
 
 
     // web server port
@@ -67,6 +80,16 @@ module.exports = function(config) {
 
     // Concurrency level
     // how many browser should be started simultaneous
-    concurrency: Infinity
+    concurrency: Infinity,
+
+    plugins: [
+      'karma-mocha',
+      'karma-chrome-launcher',
+      'karma-coverage',
+      'karma-webpack',
+      'karma-sourcemap-loader',
+      'karma-chai',
+    ],
+
   })
 }

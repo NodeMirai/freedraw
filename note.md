@@ -190,8 +190,11 @@ filereader对象通过监听onloadend事件判断blob对象读取状态
 - chai断言库
 - superagent模拟发送请求
 - jsdom模拟浏览器环境
-2. react测试问题
+2. mocha中react测试问题
 - 组件测试分为虚拟dom测试与真实dom测试，当对真实dom测试时需要依赖浏览器dom树环境(window, document, navigator),
   因此在运行测试文件前需要运行一个前置条件文件setup.js,其中包含了enzyme官方前置与jsdom获取dom环境的过程
 - 断言判断时候使用try catch捕捉异常后会认为测试无问题，只有it中抛出错误才会认为用例失败
 - mocha 测试react组件时会无法解析引入的样式文件，需要安装ignore-styles模块，在执行mocha时添加--require ignore-styles参数可忽略
+3. 使用karma集成mocha webpack测试问题
+- karma中需要使用浏览器相关插件，因此不需要jsdom的支持
+- 覆盖率测试报告插件coverage需要在karma.conf.js中配置coverageReporter支持(isparta模块支持等)，instrumenter参数不可编写具体路径名，而要使用**/*.js的形式  karma-coverage#208
