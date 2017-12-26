@@ -29,7 +29,7 @@ class UserInfo extends React.Component {
     }
   }
 
-  componentWillMount() {
+  componentDidMount() {
 
     fetchAPI('/api/user', { method: 'GET' }, (result) => {
       if (result.status === 200) {

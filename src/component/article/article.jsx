@@ -20,17 +20,16 @@ class Article extends React.Component {
     super(props)
   }
 
-  componentWillMount() {
-    let { getArticle } = this.props
-    getArticle()
-  }
-
   componentDidMount() {
+    let { getArticle } = this.props
     let editor = new wangeditor(this.refs.toolbar, this.refs.article)
+
+    getArticle()
     editor.create()
     this.setState({
       editor
     })
+
   }
 
   componentWillUnmount() {

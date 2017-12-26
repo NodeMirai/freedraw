@@ -17,7 +17,7 @@ class LivingRoom extends React.Component {
     super(props)
   }
 
-  componentWillMount() {
+  componentDidMount() {
     // 获取文章列表，视频列表，图片列表
     let getArticles = this.props.getArticles
     getArticles()

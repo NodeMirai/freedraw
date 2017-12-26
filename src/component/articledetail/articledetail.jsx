@@ -14,7 +14,7 @@ class ArticleDetail extends React.Component{
     }
   }
 
-  componentWillMount() {
+  componentDidMount() {
     let articleId = this.state.articleId
     fetchAPI(`/api/index/article/${articleId}`,{method:'GET'}, (result) => {
       if (result.status === 200) {
