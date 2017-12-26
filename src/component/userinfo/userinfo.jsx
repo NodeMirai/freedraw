@@ -40,7 +40,7 @@ class UserInfo extends React.Component {
           year: birthday.getFullYear(),
           month: birthday.getMonth(),
           date: birthday.getDate(),
-          sex: result.data.sex ? result.data.sex +'': '1',
+          sex: result.data.sex ? result.data.sex + '' : '1',
         })
       }
     })
@@ -69,23 +69,31 @@ class UserInfo extends React.Component {
 
   updateInfo() {
     let { nickname, sex, year, month, date, avatar } = this.state
+    let showModalToggle = this.props.showModalToggle
     let file = this.refs.file.files[0]
 
     fetchAPI('/api/user', { method: 'PUT', data: { nickname, sex, birthday: new Date(year, month, date), avatar } }, (data) => {
       if (data.status === 200) {
 
-        // 文件上传
-        var fd = new FormData();
-        fd.append('file', file);
-        var ext = file.name.substring(file.name.lastIndexOf('.'));
-        fd.append('extention', ext);
-        fd.append('maxsize', 1024 * 1024 * 4);// 默认一次上传最大4MB
-        fd.append('isClip', -1);
-        fetch('/api/upload', { method: 'POST', headers: { Authorization: sessionStorage.getItem('token'), }, body: fd })
-          .then(result => result.json())
-          .then(result => {
-            sessionStorage.setItem('avatar', result.data)
-          })
+        if (file) {
+          // 文件上传
+          var fd = new FormData();
+          fd.append('file', file);
+          var ext = file.name.substring(file.name.lastIndexOf('.'));
+          fd.append('extention', ext);
+          fd.append('maxsize', 1024 * 1024 * 4);// 默认一次上传最大4MB
+          fd.append('isClip', -1);
+          fetch('/api/upload', { method: 'POST', headers: { Authorization: sessionStorage.getItem('token'), }, body: fd })
+            .then(result => result.json())
+            .then(result => {
+              sessionStorage.setItem('avatar', result.data)
+              alert('保存信息成功')
+              showModalToggle(false)
+            })
+        } else {
+          alert('保存信息成功')
+          showModalToggle(false)
+        }
       }
     })
 
@@ -113,9 +121,9 @@ class UserInfo extends React.Component {
     let showModalToggle = this.props.showModalToggle
 
     let yearList = [], monthList = [], dateList = []
-    for (let i = 1960; i<2010; i++) yearList.push(i)
-    for (let i = 1; i<13; i++) monthList.push(i)
-    for (let i = 1; i<32; i++) dateList.push(i)
+    for (let i = 1960; i < 2010; i++) yearList.push(i)
+    for (let i = 1; i < 13; i++) monthList.push(i)
+    for (let i = 1; i < 32; i++) dateList.push(i)
 
     return (
       <form className="userinfo">
@@ -147,23 +155,23 @@ class UserInfo extends React.Component {
           </select>
           年
           <select name="month" value={month} onChange={this.handleMonth.bind(this)}>
-          {
-            monthList.map(val => {
-              return (
-                <option key={val} value={val}>{val}</option>
-              )
-            })
-          }
+            {
+              monthList.map(val => {
+                return (
+                  <option key={val} value={val}>{val}</option>
+                )
+              })
+            }
           </select>
           月
           <select name="date" value={date} onChange={this.handleDay.bind(this)}>
-          {
-            dateList.map(val => {
-              return (
-                <option key={val} value={val}>{val}</option>
-              )
-            })
-          }
+            {
+              dateList.map(val => {
+                return (
+                  <option key={val} value={val}>{val}</option>
+                )
+              })
+            }
           </select>
           日
         </section>
