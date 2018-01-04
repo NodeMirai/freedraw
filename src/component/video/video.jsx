@@ -15,8 +15,14 @@ class Video extends React.Component {
   render() {
 
     return (
-      <div  id="chat">
-        video
+      <div id="chat">
+
+        <video id="example-video" data-setup='{}' width="600" height="300" className="video-js vjs-default-skin" controls>
+          <source
+            src="http://nodemirai.com/hls/test.m3u8"
+            type="application/x-mpegURL"></source>
+        </video>
+
       </div>
     )
 
